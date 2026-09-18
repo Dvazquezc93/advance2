@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>002: Variables y constantes</title>
+    <style>
+      p {
+        padding: 20px 10px;
+        background-color: #eee;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 >002: Variables y constantes</h1>
+    <h2 id ="1"></h2>
+    <h3 id ="2"></h3>
+    <p id ="3"></p>
+    <script>
+        for (let i = 1; i <= 3; i++){ 
+            if (i <= 2) {
+                document.getElementById(i.toString()).innerHTML= "Esto es el título "+ (i+1);
+            }
+            else{
+                document.getElementById(i.toString()).innerHTML= "Esto es el párrafo";
+            }
+        }
+    </script>
+  </body>

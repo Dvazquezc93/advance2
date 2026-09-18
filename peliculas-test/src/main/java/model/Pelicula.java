@@ -1,16 +1,18 @@
 package model;
 
 public class Pelicula {
- private Integer id;
+ private Long id;
  private String titulo;
  private String direccion;
  private Integer añoEstreno;
  private Integer duracion;
+ private Integer edad;
  
- public Integer getId() {
+
+ public Long getId() {
 	return id;
  }
- public void setId(Integer id) {
+ public void setId(Long id) {
 	this.id = id;
  }
  public String getTitulo() {
@@ -37,5 +39,17 @@ public class Pelicula {
  public void setDuracion(Integer duracion) {
 	this.duracion = duracion;
  }
+ 
+ public Integer getEdad() {
+	return edad;
+}
+ public void setEdad(Integer edad) {
+	this.edad = edad;
+ }
+ @Override
+public String toString() {
+	return "Pelicula [id=" + id + ", titulo=" + titulo + ", direccion=" + direccion + ", añoEstreno=" + añoEstreno
+			+ ", duracion=" + duracion + "]";
+}
  
 }

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>003: Tipos de datos</title>
+    <style>
+      p {
+        padding: 20px 10px;
+        background-color: #eee;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 >003: Tipos de datos</h1>
+    <p id ="1"></p>
+    <p id ="2"></p>
+    <p id ="3"></p>
+    <p id ="4"></p>
+    <p id ="5"></p>
+    <p id ="6"></p>
+    <p id ="7"></p>
+    <p id ="8"></p>
+    <p id ="9"></p>
+    <p id ="10"></p>
+    <p id ="11"></p>
+    <p id ="12"></p>
+    <p id ="13"></p>
+
+    <script>
+        let numero=10;
+        for (let i = 1; i <=13; i++){ 
+            if (i <= 2) {
+                //positivo y negativo
+                document.getElementById(i.toString()).innerHTML= numero +" se corresponde con el tipo "+ typeof numero;
+                numero = -10;
+            }
+            else if(i<=3){
+                numero=10;
+                document.getElementById(i.toString()).innerHTML= numero +" se corresponde con el tipo "+ typeof numero;
+                numero = numero-20.5;
+            }
+             else if(i<=4){
+                numero = -20.5;
+                document.getElementById(i.toString()).innerHTML= numero +" se corresponde con el tipo "+ typeof numero;
+            }
+            else if(i<=5){
+                numero = 0o343;
+                document.getElementById(i.toString()).innerHTML= 0o${numero} +"se corresponde con el tipo "+ typeof numero;
+            }
+        }
+    </script>
+  </body>
