@@ -1,0 +1,52 @@
+function sumar(num1:any, num2:any){
+return num1+num2;
+}
+console.log(sumar(2,4));
+
+function calculateSquareArea(side:number){
+return side*side;
+}
+const square:number = 4;
+const float:number =10.341;
+const binario:number = 0b0101010101010
+const text :string ="El  cuadrado de "+binario+" es "  + calculateSquareArea(binario);
+console.log(text);
+const variable:number = 1;
+if (variable) console.log("verdad");
+
+const objeto:{
+    nombre:string,
+    edad:number
+}={
+    nombre:"Daniel",
+    edad:32
+}
+ function calculaAreatriangulo(nombre:string,base:number,altura:number){
+    return (nombre+(base*altura/2));
+ }
+ const nombre:string="El área de un triángulo es: ";
+ const arrayDatos:number[] =[4,6];
+ console.log(calculaAreatriangulo(nombre,arrayDatos[0],arrayDatos[1]));
+ const array:number[] =[1,2,3,4,5,6]
+ for(const dato of array){
+    console.log(dato);
+ }
+ enum colores{blue, red, black, green}
+
+ function merge (first:any, second:any){
+    console.log(first+second);
+ }
+ merge(true,true);
+
+ function merge2(valor1: string|number, valor2:String|number){
+    if(typeof valor1==="number" && typeof valor2=== "number"){
+        return valor1+valor2;
+    }
+    throw new Error("Error tipo");
+    
+ }
+ console.log(merge2(1,2));
+ function procesar( browser :"firefox"| "chrome"| "explorer"){
+    console.log("Conectado");
+ }
+ procesar("chrome");
