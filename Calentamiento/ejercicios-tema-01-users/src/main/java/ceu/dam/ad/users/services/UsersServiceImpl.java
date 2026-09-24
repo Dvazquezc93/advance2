@@ -10,7 +10,7 @@ import ceu.dam.ad.users.dao.UserRepository;
 import ceu.dam.ad.users.model.User;
 
 public class UsersServiceImpl extends Service implements UserService {
-	private UserRepository repo;
+	private final UserRepository repo;
 
 	public UsersServiceImpl() {
 		repo = new UserRepository();
@@ -32,7 +32,8 @@ public class UsersServiceImpl extends Service implements UserService {
 				user.setCreatedDate(LocalDate.now());
 				String out = DigestUtils.sha3_256Hex(user.getPassword());
 				user.setPassword(out);
-				repo.insert(conn, user);
+				user.setId(repo.insert(conn, user));
+				;
 				return user;
 			} else {
 				throw new DuplicateUserException("El usuario ya esta en el BBDD");
@@ -98,8 +99,14 @@ public class UsersServiceImpl extends Service implements UserService {
 					throw new UserNotFoundException("El usuario no esta en el BBDD");
 				}
 				if (userName.getPassword().equals(out)) {
-					userName.setLastLoginDate(LocalDate.now());
-					repo.update(conn, userName);
+					try {
+						userName.setLastLoginDate(LocalDate.now());
+						repo.update(conn, userName);
+					} catch (Exception e) {
+						System.err.println("Error actualizando fecha de ultimo login");
+						e.printStackTrace();
+					}
+					
 					return email;
 				} else {
 					throw new UserUnauthorizedException("la contraseña no es correcta ");
@@ -108,6 +115,7 @@ public class UsersServiceImpl extends Service implements UserService {
 		} catch (SQLException e) {
 			throw new UserException("Error al conectar a la base de datos", e);
 		}
+		return null;
 	}
 
 	@Override
