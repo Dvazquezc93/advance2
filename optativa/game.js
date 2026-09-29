@@ -1,11 +1,11 @@
-//import { Scoreboard } from "./Componentes/Scoreboard"
+import { Scoreboard } from "./Componentes/Scoreboard.js"
 
 export class Game extends Phaser.Scene {
     constructor() {
         super({ key: 'game' });
     }
-    init() {
-        this.score = 0;
+    init () {
+        this.scoreboard = new Scoreboard(this);
     }
     preload() {
         this.load.image('background', 'images/background.png');
@@ -39,22 +39,8 @@ export class Game extends Phaser.Scene {
         this.physics.world.setBoundsCollision(true, true, true, false);
         this.ball.setCollideWorldBounds(true);
         this.platform.setCollideWorldBounds(true);
-        this.scoreText = this.add.text(16, 16, 'PUNTOS: 0', {
-            fontSize: '24px',
-            fontFamily: '"Trebuchet MS", "Optima", sans-serif',
-            fontStyle: 'bold italic',
-            fill: '#ffe680',           // Dorado claro
-            stroke: '#002255',         // Borde azul marino estilo FFX
-            strokeThickness: 5,
-            shadow: {
-                offsetX: 2,
-                offsetY: 2,
-                color: '#000814',
-                blur: 4,
-                stroke: true,
-                fill: true
-            }
-        })
+        //inicializamos scoreboard
+        this.scoreboard.create();
         let velocity = 100 * Phaser.Math.Between(1.3, 2);
         if (Phaser.Math.Between(0, 10) > 5) {
             velocity = 0 - velocity;
@@ -62,9 +48,16 @@ export class Game extends Phaser.Scene {
         this.ball.setVelocity(velocity, 10);
     }
     //metodo bola plataforma
-    platformImpact() {
-        this.score++;
-        this.scoreText.setText('Puntos: ' + this.score)
+    platformImpact(ball, platform) {
+       this.scoreboard.incrementPoint(1);
+
+    let relativeImpact = ball.x -platform.x;
+    if(relativeImpact>0.1 && relativeImpact>-0.1){
+        ball.setVelocityX(Phaser.Math.Between(-10,10));
+    }
+    else{
+        ball.setVelocityX(10* relativeImpact);
+    }
     }
 
 

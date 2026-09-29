@@ -1,3 +1,58 @@
-.atencion{
-  color: red;
+.botonera {
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.boton {
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.primario {
+  background-color: #087ea4;
+  border: 1px solid #087ea4;
+  color: white;
+}
+
+.secundario {
+  background-color: white;
+  border: 1px solid #087ea4;
+  color: #087ea4;
+}
+
+.grande {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.25rem;
+}
+
+.panel {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f8;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.tarjeta {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 1rem;
+  width: 190px;
+}
+
+.tarjeta h2 {
+  font-size: 1.1rem;
+  color: #087ea4;
+  margin: 0.5rem 0;
+}
+
+.tarjeta ul {
+  padding-left: 1.2rem;
 }

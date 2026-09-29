@@ -31,7 +31,7 @@ const objeto:{
  for(const dato of array){
     console.log(dato);
  }
- enum colores{blue, red, black, green}
+ enum colores{blue=100, red, black, green}
 
  function merge (first:any, second:any){
     console.log(first+second);
@@ -50,3 +50,31 @@ const objeto:{
     console.log("Conectado");
  }
  procesar("chrome");
+function calcularRectArea (base:number, altura: number){
+   return(base*altura/2);
+}
+function printResultado(result:number){
+   console.log("Resultado :" +result);
+}
+let calculo: (a:number, b:number)=> number;
+calculo=calcularRectArea;
+printResultado(calculo(2,10));
+
+function calculaAreatri(base: number, altura:number){
+return (base*altura/2);
+}
+let calculo2: (a:number, b:number)=> number;
+calculo2= calculaAreatri;
+ enum parametros{base=100, altura}
+printResultado(calculo2(parametros.base,parametros.altura));
+
+const arrayPara:number[]=[20,30]
+printResultado(calculo2(arrayPara[0],arrayPara[1]));
+
+function calculoAlumno(color_pelo:"negro"|"rubio",edad:14|15|16){
+   console.log("Color de pelo :"+color_pelo+" edad:"+edad);
+}
+calculoAlumno("negro",14);
+
+calculoAlumno("pelirrojo",200);
+
