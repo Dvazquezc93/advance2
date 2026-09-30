@@ -14,12 +14,13 @@ public class UserRepository {
 	/** Debe insertar un usuario en BBDD. Devuelve el ID generado. */
 	public Long insert(Connection conn, User user) throws SQLException {
 
-		String sql = "insert into user value(NULL,?,?,?,NULL,?)";
+		String sql = "insert into user value(NULL,?,?,?,?,NULL,?)";
 		PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 		stmt.setString(1, user.getPassword());
 		stmt.setString(2, user.getUsername());
 		stmt.setString(3, user.getEmail());
-		stmt.setDate(4, Date.valueOf(user.getCreatedDate()));
+		stmt.setString(4, user.getName());
+		stmt.setDate(5, Date.valueOf(user.getCreatedDate()));
 		stmt.execute();
 		ResultSet rs = stmt.getGeneratedKeys();
 		if (rs.next()) {
@@ -54,6 +55,7 @@ public class UserRepository {
 		user.setPassword(rs.getString("Password"));
 		user.setCreatedDate(rs.getDate("created_date").toLocalDate());
 		user.setLastLoginDate(rs.getDate("last_login_date").toLocalDate());
+	
 		return user;
 	}
 
@@ -102,7 +104,7 @@ public class UserRepository {
 		stmt.setString(3, user.getEmail());
 		stmt.setString(4, user.getName());
 		stmt.setDate(5, Date.valueOf(user.getLastLoginDate()));
-		stmt.setDate(5, Date.valueOf(user.getCreatedDate() == null ? null : user.getCreatedDate()));
+		stmt.setDate(6, Date.valueOf(user.getCreatedDate() == null ? null : user.getCreatedDate()));
 		stmt.setLong(7, user.getId());
 		return stmt.executeUpdate();
 

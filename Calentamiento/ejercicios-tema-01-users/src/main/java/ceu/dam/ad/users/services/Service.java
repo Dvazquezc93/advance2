@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public abstract class Service {
 	public Connection abrirConexion() throws SQLException {
-		String url = "jdbc:mariadb://localhost:3306/blas-bd";
+		String url = "jdbc:mariadb://localhost:3306/blas-db";
 		String user = "Auronyoungcris";
 		String pass = "antimoconeiva";
 		return abrirConexion(url, user, pass);

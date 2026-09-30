@@ -1,9 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>ceu.dam.ad</groupId>
-  <artifactId>ejercicios-tema-01-users</artifactId>
-  <version>1.0.0</version>
-  <dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ceu.dam.ad</groupId>
+	<artifactId>ejercicios-tema-01-users</artifactId>
+	<version>1.0.0</version>
+	<dependencies>
 		<!-- Source:
 		https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
 		<dependency>
@@ -25,9 +27,16 @@
 			<version>1.22.1</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+		<groupId>ch.qos.logback</groupId>
+		<artifactId>logback-classic</artifactId>
+		<version>1.6.4</version>
+		<scope>compile</scope>
+	</dependency>
 	</dependencies>
-  <properties>
-  	<maven.compiler.release>21</maven.compiler.release>
-  </properties>
-  	
+	
+	<properties>
+		<maven.compiler.release>21</maven.compiler.release>
+	</properties>
+
 </project>

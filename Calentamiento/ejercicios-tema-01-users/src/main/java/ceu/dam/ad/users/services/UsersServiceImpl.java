@@ -1,15 +1,19 @@
 package ceu.dam.ad.users.services;
 
 import java.sql.Connection;
+
 import java.sql.SQLException;
 import java.time.LocalDate;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ceu.dam.ad.users.dao.UserRepository;
 import ceu.dam.ad.users.model.User;
 
 public class UsersServiceImpl extends Service implements UserService {
+	private static final Logger Logger = LoggerFactory.getLogger(UsersServiceImpl.class);
 	private final UserRepository repo;
 
 	public UsersServiceImpl() {
@@ -27,21 +31,24 @@ public class UsersServiceImpl extends Service implements UserService {
 		 * el ID) 4. Si hay algún error, lanzará UserException con el origen
 		 */
 		try (Connection conn = abrirConexion()) {
+			Logger.info("Creando un usuario");
 			if (repo.getByEmail(conn, user.getEmail()) == null
 					&& repo.getByUserName(conn, user.getUsername()) == null) {
 				user.setCreatedDate(LocalDate.now());
 				String out = DigestUtils.sha3_256Hex(user.getPassword());
 				user.setPassword(out);
 				user.setId(repo.insert(conn, user));
-				;
+				Logger.info("Usuario creado."+user);
 				return user;
 			} else {
+				Logger.debug("Usuario duplicado");
 				throw new DuplicateUserException("El usuario ya esta en el BBDD");
 			}
 		} catch (SQLException e) {
+			Logger.error("Error al conectar a la base de datos", e);
 			throw new UserException("Error al conectar a la base de datos", e);
 		}
-
+		
 	}
 
 	@Override
@@ -60,7 +67,7 @@ public class UsersServiceImpl extends Service implements UserService {
 			if (repo.getById(conn, idUser) != null) {
 				String out1 = DigestUtils.sha3_256Hex(oldPassword);
 				String out2 = DigestUtils.sha3_256Hex(newPassword);
-				if (out1.equals(out2)) {
+				if (!out1.equals(out2)) {
 					User user = repo.getById(conn, idUser);
 					user.setPassword(out2);
 					repo.update(conn, user);
@@ -106,7 +113,7 @@ public class UsersServiceImpl extends Service implements UserService {
 						System.err.println("Error actualizando fecha de ultimo login");
 						e.printStackTrace();
 					}
-					
+
 					return email;
 				} else {
 					throw new UserUnauthorizedException("la contraseña no es correcta ");
@@ -120,17 +127,17 @@ public class UsersServiceImpl extends Service implements UserService {
 
 	@Override
 	public User getUser(Long idUser) throws UserNotFoundException, UserException {
-		/** Recibe el id de un usuario. El servicio tendrá que:
-		 * 1. Si el usuario no existe con ese ID, lanzar UserNotFoundException
-		 * 2. Devolver los datos completos del usuario
-		 * 3. Si hay algún error, lanzará UserException con el origen
+		/**
+		 * Recibe el id de un usuario. El servicio tendrá que: 1. Si el usuario no
+		 * existe con ese ID, lanzar UserNotFoundException 2. Devolver los datos
+		 * completos del usuario 3. Si hay algún error, lanzará UserException con el
+		 * origen
 		 */
 		try (Connection conn = abrirConexion()) {
 			User user = repo.getById(conn, idUser);
-			if (user!=null) {
+			if (user != null) {
 				return user;
-			}
-			else {
+			} else {
 				throw new UserNotFoundException("El usuario no esta en el BBDD");
 			}
 		} catch (SQLException e) {
