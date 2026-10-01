@@ -5,7 +5,7 @@ type TarjetaProps={
     children: ReactNode
 }
 
-function Tarjeta({titulo,children}: TarjetaProps ) {
+function Tarjeta({titulo='Aviso',children}: TarjetaProps ) {
   return (
     <section className="tarjeta">
         <h2>{titulo}</h2>

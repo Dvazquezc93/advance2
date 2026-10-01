@@ -109,3 +109,34 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+.avisos {
+  font-family: Arial, sans-serif;
+  max-width: 440px;
+  padding: 1rem;
+}
+
+.aviso {
+  border-left: 5px solid;
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.aviso div {
+  margin-top: 0.25rem;
+}
+
+.info {
+  background-color: #e3f2fd;
+  border-color: #1565c0;
+}
+
+.exito {
+  background-color: #e8f5e9;
+  border-color: #2e7d32;
+}
+
+.error {
+  background-color: #ffebee;
+  border-color: #c62828;
+}
