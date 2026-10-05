@@ -8,9 +8,16 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'places',
     pathMatch: 'full'
   },
+  {
+    path: 'places',
+    loadChildren: () => import('./places/places.module').then( m => m.PlacesPageModule)
+  },
+  {path: ":placeID",
+    loadChildren: () => import('./places/place-detail/place-detail.module').then( m => m.PlaceDetailPageModule)
+  }
 ];
 
 @NgModule({

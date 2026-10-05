@@ -16,9 +16,11 @@ export class RestarButton {
         })
     }
     preload() {
-        this.relatedScene.load.spritesheet('button', 'images/RestarButton.png', { frameWidth: 190, framehHeight })
+        this.relatedScene.load.spritesheet('button', 'images/RestarButton.png', { frameWidth: 190, framehHeight });
+
     }
     create() {
         this.startButton = this.relatedScene.add.sprite(400, 230, 'button').setInteractive();
+       
     }
 }

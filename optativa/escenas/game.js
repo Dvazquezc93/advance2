@@ -1,4 +1,6 @@
-import { Scoreboard } from "./Componentes/Scoreboard.js"
+import { Scoreboard } from "../Componentes/Scoreboard.js"
+import { RestarButton } from "../Componentes/RestartButton.js";
+import { Gameover } from "../escenas/Gameover.js";
 
 export class Game extends Phaser.Scene {
     constructor() {
@@ -9,14 +11,14 @@ export class Game extends Phaser.Scene {
     }
     preload() {
         this.load.image('background', 'images/background.png');
-        this.load.image('gameover', 'images/gameover.png');
+        //this.load.image('gameover', 'images/gameover.png');
         this.load.image('platform', 'images/platform.png');
         this.load.image('ball', 'images/ball.png');
         this.load.image('bluebrick', 'images/brickBlue.png');
         this.load.image('blackbrick', 'images/brickBlack.png'),
             this.load.image('greenbrick', 'images/brickGreen.png');
         this.load.image('orangebrick', 'images/brickOrange.png');
-        this.load.image('congratulation', 'images/congratulation.png');
+        //this.load.image('congratulation', 'images/congratulation.png');
 
     }
 
@@ -24,11 +26,12 @@ export class Game extends Phaser.Scene {
     create() {
         //imagenes de fondo
         this.add.image(400, 250, 'background');
+        this.restartButton.create();
         this.gameoverImage = this.add.image(400, 90, 'gameover').setScale(0.5);
         //final del juego
-        this.gameoverImage.visible = false;
-        this.congratulationImage = this.add.image(400.90, 'congratulation');
-        this.congratulationImage = false;
+        //this.gameoverImage.visible = false;
+        //this.congratulationImage = this.add.image(400.90, 'congratulation');
+        //this.congratulationImage = false;
         //plataforma
         this.platform = this.physics.add.image(400, 450, 'platform').setImmovable();
         //plataforma
@@ -93,8 +96,9 @@ export class Game extends Phaser.Scene {
         brick.disableBody(true, true);
         this.scoreboard.incrementPoint(1);
         if (this.bricks.countActive() === 0) {
-            this.congratsImage.visible = true;
-            this.scene.pause();
+           // this.congratsImage.visible = true;
+           // this.scene.pause();
+           this.showCongratulations();
         }
     }
 
@@ -127,21 +131,27 @@ export class Game extends Phaser.Scene {
         }
         if (this.ball.y > 500) {
             console.log("Fin de partida");
-            this.gameoverImage.visible = true
-            if (this.cursors.up.isDown) {
-                this.scene.restart();
-            }
-            this.bricks.setVisible(false);
+            this.showGameOver();
+            //this.gameoverImage.visible = true
+          // if (this.cursors.up.isDown) {
+                
+            //}
+            //this.bricks.setVisible(false);
 
         }
         if (this.ball.getData && this.cursors.up.isDown) {
             this.ball.setVelocity(-75, -300);
             this.ball.setData('glue', false);
         }
-        else{
-
-        }
+        
 
 
+    }
+
+    showGameOver(){
+        this.scene.start('gameover');
+    }
+    showCongratulations(){
+        this.scene.star('congratulations');
     }
 }
