@@ -14,6 +14,14 @@ import SaludoConDatos from './components/SaludoConDatos'
 import Tarjeta from './components/Tarjeta.tsx'
 import Boton from './components/Boton.tsx'
 import Contador from './components/Contador.tsx'
+import MiComponente from './components/continuando/MiComponente.tsx'
+import MostrarOcultar from './components/continuando/MostrarOcultar.tsx'
+import AlternarContenido from './components/continuando/AlternarContenido.tsx'
+import EstadoUsuario from './components/continuando/EstadoUsuario.tsx'
+import EstadoUsuarioArray from './components/continuando/EstadoUsuarioArray.tsx'
+import TextoInfinito from './components/continuando/TextoInfinito.tsx'
+import EjemploImput from './components/continuando/EjemploImput.tsx'
+import EjemploParametros from './components/continuando/EjemploParametros.tsx'
 
 
 
@@ -22,10 +30,14 @@ function App() {
 
   return (
     <>
-    <h3>OnChange</h3>
-    <input type="text" onChange={(e)=>{setTexto(e.target.value)}}></input>
-    <p>{texto}</p>
-    <button onSubmit={(e)=>{setTexto{'Reinicio'}}}>texto :{texto}</button>
+    <MiComponente/>
+    <MostrarOcultar/>
+    <AlternarContenido/>
+    <EstadoUsuario/>
+     <EstadoUsuarioArray/>
+     <TextoInfinito/>
+     <EjemploImput/>
+     <EjemploParametros/>
     </>
     
   )
@@ -35,6 +47,12 @@ function App() {
 export default App
 
  {/*
+
+  <h3>OnChange</h3>
+    <input type="text" onChange={(e)=>{setTexto(e.target.value)}}></input>
+    <p>{texto}</p>
+    <button onSubmit={()=>{setTexto('Reinicio')}}>texto :{texto}</button>
+    
   const enDolares = (cantidad: number) => {
   return cantidad.toLocaleString('us-US', {
     style: 'currency',
