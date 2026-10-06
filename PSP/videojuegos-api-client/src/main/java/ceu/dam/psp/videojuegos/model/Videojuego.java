@@ -1,5 +1,8 @@
 package ceu.dam.psp.videojuegos.model;
 
+import jdk.jfr.DataAmount;
+
+@Data
 public class Videojuego {
 	private String id;
 	private String nombre;
