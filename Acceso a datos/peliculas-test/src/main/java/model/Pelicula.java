@@ -9,7 +9,7 @@ public class Pelicula {
  private String direccion;
  private Integer añoEstreno;
  private Integer duracion;
- private Integer edad;
+ private Integer edad; 
  
  
 
