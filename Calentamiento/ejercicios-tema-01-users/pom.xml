@@ -33,6 +33,11 @@
 		<version>1.6.4</version>
 		<scope>compile</scope>
 	</dependency>
+		<dependency>
+			<groupId>ceu.dam.ad</groupId>
+			<artifactId>test-spring-Users-1</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	
 	<properties>

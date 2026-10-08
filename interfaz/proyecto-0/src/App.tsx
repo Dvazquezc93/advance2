@@ -22,6 +22,8 @@ import EstadoUsuarioArray from './components/continuando/EstadoUsuarioArray.tsx'
 import TextoInfinito from './components/continuando/TextoInfinito.tsx'
 import EjemploImput from './components/continuando/EjemploImput.tsx'
 import EjemploParametros from './components/continuando/EjemploParametros.tsx'
+import EjercicioPractico from './components/SelectorActividades.tsx'
+import SelectorActividades from './components/SelectorActividades.tsx'
 
 
 
@@ -30,14 +32,7 @@ function App() {
 
   return (
     <>
-    <MiComponente/>
-    <MostrarOcultar/>
-    <AlternarContenido/>
-    <EstadoUsuario/>
-     <EstadoUsuarioArray/>
-     <TextoInfinito/>
-     <EjemploImput/>
-     <EjemploParametros/>
+    <SelectorActividades></SelectorActividades>
     </>
     
   )
@@ -93,4 +88,13 @@ export default App
       </Catalogo>
       <Pie />
        <Contador></Contador>
+       <MiComponente/>
+    <MostrarOcultar/>
+    <AlternarContenido/>
+    <EstadoUsuario/>
+     <EstadoUsuarioArray/>
+     <TextoInfinito/>
+     <EjemploImput/>
+     <EjemploParametros/>
+       
     </div>*/}

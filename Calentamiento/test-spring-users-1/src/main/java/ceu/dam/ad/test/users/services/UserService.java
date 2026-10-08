@@ -1,4 +1,5 @@
-import ceu.dam.ad.test.users.model.User;
+package ceu.dam.ad.test.users.services;
+
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -7,22 +8,20 @@ import java.util.Optional;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 
 import ceu.dam.ad.test.users.model.User;
 import ceu.dam.ad.test.users.repositories.UserRepository;
-import ceu.dam.ad.users.services.DuplicateUserException;
-import ceu.dam.ad.users.services.UserException;
-import ceu.dam.ad.users.services.UserNotFoundException;
-import ceu.dam.ad.users.services.UserUnauthorizedException;
-import model.Pelicula;
 
+@Service
 public class UserService {
 	@Autowired
 	private UserRepository repo;
 	
 	public User createUser(User user) throws DuplicateUserException, UserException {
 		try {
-			if (repo.findByUsernameAndEmail(user.getName(),user.getEmail()).isEmpty()) {
+			if (repo.findByUsernameOrEmail(user.getName(),user.getEmail()).isEmpty()) {
 				user.setCreatedDate(LocalDate.now());
 				String out = DigestUtils.sha3_256Hex(user.getPassword());
 				user.setPassword(out);;
@@ -31,31 +30,27 @@ public class UserService {
 			else {
 				throw new DuplicateUserException("El usuario ya esta en el BBDD");
 			}
-		} catch (Exception e) {
+		} catch (DataAccessException e) {
 			throw new UserException("Error al conectar a la base de datos", e);
 		}
 		
 	
 		
 	}
-	public void changePassword(Long idUser, String oldPassword, String newPassword) throws UserException {
+	public void changePassword(Long idUser, String oldPassword, String newPassword) throws UserException, UserUnauthorizedException, UserNotFoundException {
 		try {
-			if (repo.findById(idUser).isPresent()) {
+			User user =repo.findById(idUser).orElseThrow( () -> new  UserNotFoundException("El usuario no esta en el BBDD"));
 				String out1 = DigestUtils.sha3_256Hex(oldPassword);
 				String out2 = DigestUtils.sha3_256Hex(newPassword);
-				if (!out1.equals(out2)) {
-					User user =repo.findById(idUser).orElseThrow( () -> new  UserNotFoundException("El usuario no esta en el BBDD"));
+				if (!out1.equals(out2) && user.getPassword().equals(out1)) {
 					user.setPassword(out2);
 					repo.save(user);
 				}
 				else {
 					throw new UserUnauthorizedException("Las dos contraseñas son iguales");
 				}
-			}
-			else {
-				throw new UserUnauthorizedException("El usuario no esta en el BBDD");
-			}
-		} catch (Exception e) {
+		
+		} catch (DataAccessException e) {
 			throw new UserException("Error al conectar a la base de datos", e);		}
 	}
 	public User login(String login, String password)
@@ -74,15 +69,16 @@ public class UserService {
 			else {
 				throw new UserUnauthorizedException("la contraseña no es correcta ");
 			}
-		} catch (Exception e) {
+		} catch (DataAccessException e) {
 			throw new UserException("Error al conectar a la base de datos", e);	
 		}
+		return null;
 		
 	}
 	public User getUser(Long idUser) throws UserNotFoundException, UserException {
 		try {
 			return repo.findById(idUser).orElseThrow(()->new  UserNotFoundException("El usuario no esta en el BBDD"));
-		} catch (Exception e) {
+		} catch (DataAccessException e) {
 			throw new UserException("Error al conectar a la base de datos", e);	
 		
 	}
