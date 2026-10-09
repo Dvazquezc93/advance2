@@ -1,6 +1,6 @@
 package ceu.dam.psp.videojuegos.model;
 
-import jdk.jfr.DataAmount;
+import lombok.Data;
 
 @Data
 public class Videojuego {
