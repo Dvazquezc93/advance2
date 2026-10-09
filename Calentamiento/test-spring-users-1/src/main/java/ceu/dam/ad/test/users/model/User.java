@@ -21,7 +21,7 @@ public class User {
 	private String name;
 	private String email;
 	private String password;
-	@Column(name = "create_date")
+	@Column(name = "created_date")
 	private LocalDate createdDate;
 	@Column(name = "last_login_date")
 	private LocalDate lastLoginDate;

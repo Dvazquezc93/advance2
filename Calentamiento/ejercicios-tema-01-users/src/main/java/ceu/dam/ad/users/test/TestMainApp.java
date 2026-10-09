@@ -1,4 +1,4 @@
-package ceu.dam.ad.test.peliculas;
+package ceu.dam.ad.users.test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -9,7 +9,7 @@ import ceu.dam.ad.test.users.model.User;
 import ceu.dam.ad.test.users.services.UserService;
 
 @SpringBootApplication
-public class TestSpringPeliculasApplicationTests implements CommandLineRunner {
+public class TestMainApp implements CommandLineRunner {
 
     @Autowired
     private UserService service;
