@@ -95,22 +95,46 @@ public class VideojuegoApiClientImpl implements VideojuegoApiClient {
 		try {
 			HttpResponse<String> response = httpClient.send(request, BodyHandlers.ofString());
 			System.out.println("Codigo respuesta :" + response.statusCode());
-			if (response.statusCode() == 404) {
+			if (response.statusCode() == 200) {
 				ObjectMapper mapper = new ObjectMapper();
 				String json = mapper.writeValueAsString(videojuego);
-				HttpRequest request2 = HttpRequest.newBuilder(URI.create(urlBase)).PUT(BodyPublishers.ofString(json)).build();
+				HttpRequest request2 = HttpRequest.newBuilder(URI.create(urlBase+"/" + videojuego.getId())).header("Content-type", "application/json").PUT(BodyPublishers.ofString(json)).build();
+				HttpResponse<String> response2 = httpClient.send(request2, BodyHandlers.ofString());
+				if (response2.statusCode() >=400) {
+					throw new NotFoundException("Error actualizando Api videojuegos");
+				}
 				
 			}
+			else {
 			throw new NotFoundException("No existe ese videjuego");
-
+			}
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
-			throw new ApiException("Error consultado Api videojuegos");
+			throw new ApiException("Error actualizando Api videojuegos");
 		}
 	}
 
 	@Override
 	public void delete(String id) throws NotFoundException, ApiException {
+		HttpRequest request = HttpRequest.newBuilder(URI.create(urlBase + "/" + id)).GET().build();
+		try {
+			HttpResponse<String> response = httpClient.send(request, BodyHandlers.ofString());
+			System.out.println("Codigo respuesta :" + response.statusCode());
+			if (response.statusCode() == 200) {
+				HttpRequest request2 = HttpRequest.newBuilder(URI.create(urlBase+"/" +id)).DELETE().build();
+				HttpResponse<String> response2 = httpClient.send(request2, BodyHandlers.ofString());
+				if (response2.statusCode() >=400) {
+					throw new NotFoundException("Error borrando Api videojuegos");
+				}
+				
+			}
+			else {
+			throw new NotFoundException("No existe ese videjuego");
+			}
+		} catch (IOException | InterruptedException e) {
+			e.printStackTrace();
+			throw new ApiException("Error borrando Api videojuegos");
+		}
 	}
 
 }
