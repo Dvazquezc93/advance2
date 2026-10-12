@@ -1,7 +1,15 @@
 export class RestarButton {
 
     constructor(scene) {
-        this.relatedScena = scene;
+       this.relatedScene= scene;
+    }
+    preload() {
+        this.relatedScene.load.spritesheet('button', 'images/Restart.png', { frameWidth: 190, frameHeight: 49});
+
+    }
+    create() {
+        this.startButton = this.relatedScene.add.sprite(400, 320, 'button').setInteractive();
+     
         this.startButton.on('pointerover', () => {
             this.startButton.setFrame(1);
 
@@ -14,13 +22,5 @@ export class RestarButton {
             console.log("pasa por aqui");
             this.relatedScene.scene.start('game');
         })
-    }
-    preload() {
-        this.relatedScene.load.spritesheet('button', 'images/RestarButton.png', { frameWidth: 190, framehHeight });
-
-    }
-    create() {
-        this.startButton = this.relatedScene.add.sprite(400, 230, 'button').setInteractive();
-       
     }
 }

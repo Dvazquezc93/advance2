@@ -8,6 +8,7 @@ export class Game extends Phaser.Scene {
     }
     init() {
         this.scoreboard = new Scoreboard(this);
+    
     }
     preload() {
         this.load.image('background', 'images/background.png');
@@ -19,15 +20,15 @@ export class Game extends Phaser.Scene {
             this.load.image('greenbrick', 'images/brickGreen.png');
         this.load.image('orangebrick', 'images/brickOrange.png');
         //this.load.image('congratulation', 'images/congratulation.png');
-
+       
     }
 
 
     create() {
         //imagenes de fondo
         this.add.image(400, 250, 'background');
-        this.restartButton.create();
-        this.gameoverImage = this.add.image(400, 90, 'gameover').setScale(0.5);
+      
+        //this.gameoverImage = this.add.image(400, 90, 'gameover').setScale(0.5);
         //final del juego
         //this.gameoverImage.visible = false;
         //this.congratulationImage = this.add.image(400.90, 'congratulation');
@@ -45,18 +46,6 @@ export class Game extends Phaser.Scene {
         //bola
         ///this.platform.setVelocity(100,100);
         //bricks
-
-        //velocidad plataforma
-        this.physics.add.collider(this.ball, this.platform, this.platformImpact, null, this);
-        this.physics.add.collider(this.ball, this.bricks, this.brickImpact, null, this);
-        //colisionado
-        this.ball.setBounce(1);
-        //rebote de bola
-        this.physics.world.setBoundsCollision(true, true, true, false);
-        this.ball.setCollideWorldBounds(true);
-        this.platform.setCollideWorldBounds(true);
-        //inicializamos scoreboard
-        this.scoreboard.create();
         this.bricks = this.physics.add.staticGroup({
             key: ['bluebrick', 'orangebrick', 'greenbrick', 'blackbrick'],
             frameQuantity: 10,
@@ -69,6 +58,18 @@ export class Game extends Phaser.Scene {
                 y: 100
             }
         })
+        //velocidad plataforma
+        this.physics.add.collider(this.ball, this.platform, this.platformImpact, null, this);
+        this.physics.add.collider(this.ball, this.bricks, this.brickImpact, null, this);
+        //colisionado
+        this.ball.setBounce(1);
+        //rebote de bola
+        this.physics.world.setBoundsCollision(true, true, true, false);
+        this.ball.setCollideWorldBounds(true);
+        this.platform.setCollideWorldBounds(true);
+        //inicializamos scoreboard
+        this.scoreboard.create();
+        
         this.physics.add.collider(this.ball, this.bricks, this.brickImpact, null, this);
         //let velocity = 100 * Phaser.Math.Between(1.3, 2);
         //if (Phaser.Math.Between(0, 10) > 5) {
@@ -107,8 +108,8 @@ export class Game extends Phaser.Scene {
         if (this.cursors.left.isDown) {
             this.platform.setVelocityX(-500);
 
-            if (this.ball.getData('Blue')) {
-                this.ball.setVelocityX(500);
+            if (this.ball.getData('glue')) {
+                this.ball.setVelocityX(0);
             }
         }
         else if (this.cursors.right.isDown) {
@@ -139,7 +140,7 @@ export class Game extends Phaser.Scene {
             //this.bricks.setVisible(false);
 
         }
-        if (this.ball.getData && this.cursors.up.isDown) {
+        if (this.ball.getData('glue') && this.cursors.up.isDown) {
             this.ball.setVelocity(-75, -300);
             this.ball.setData('glue', false);
         }
@@ -152,6 +153,6 @@ export class Game extends Phaser.Scene {
         this.scene.start('gameover');
     }
     showCongratulations(){
-        this.scene.star('congratulations');
+        this.scene.start('congratulations');
     }
 }

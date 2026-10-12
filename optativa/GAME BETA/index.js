@@ -1,12 +1,12 @@
-import { congratulations } from './Componentes/congratulations.js';
-import { Gameover } from './Componentes/Gameover.js';
-import {Game} from './game.js'
+import { congratulations } from './escenas/Congratulations.js';
+import { Gameover } from './escenas/Gameover.js';
+import {Game} from './escenas/game.js'
 
 const config  = {
     type : Phaser.AUTO,
     width: 800,
     height: 500,
-    scene: [Game,Gameover,congratulations],
+    scene: [Game,congratulations,Gameover],
     physics: {
         default :'arcade',
         arcade: {
