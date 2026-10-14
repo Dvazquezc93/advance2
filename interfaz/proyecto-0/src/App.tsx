@@ -24,6 +24,12 @@ import EjemploImput from './components/continuando/EjemploImput.tsx'
 import EjemploParametros from './components/continuando/EjemploParametros.tsx'
 import EjercicioPractico from './components/SelectorActividades.tsx'
 import SelectorActividades from './components/SelectorActividades.tsx'
+import ListaMala from './components/continuando/ListaMala.tsx'
+import ListaBuena from './components/continuando/ListaBuena.tsx'
+import ListaAlumno from './components/continuando/ListaAlumno.tsx'
+import ListaAlumnosFiltrados from './components/continuando/ListaAlumnosFiltrados.tsx'
+import ListaCompra from './components/continuando/ListaCompra.tsx'
+import CarritoCompra from './components/CarritoCompra.tsx'
 
 
 
@@ -32,7 +38,8 @@ function App() {
 
   return (
     <>
-    <SelectorActividades></SelectorActividades>
+     
+   <CarritoCompra></CarritoCompra>
     </>
     
   )
@@ -96,5 +103,7 @@ export default App
      <TextoInfinito/>
      <EjemploImput/>
      <EjemploParametros/>
-       
+      <SelectorActividades></SelectorActividades>
+      <ListaMala></ListaMala>
+      <ListaBuena></ListaBuena>
     </div>*/}

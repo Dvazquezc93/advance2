@@ -59,6 +59,14 @@ function SelectorActividades() {
             </li>
             </>
          )}
+         {visible2&&actividad==='' &&(
+            <>
+            <li>
+              <ul>No Hay actividad seleccionada</ul>
+            
+            </li>
+            </>
+         )}
         
 
 
