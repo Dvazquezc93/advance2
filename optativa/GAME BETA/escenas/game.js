@@ -8,7 +8,11 @@ export class Game extends Phaser.Scene {
     }
     init() {
         this.scoreboard = new Scoreboard(this);
+<<<<<<<< Updated upstream:optativa/GAME BETA/escenas/game.js
     
+========
+        this.restartButton = new RestarButton(this);
+>>>>>>>> Stashed changes:optativa/Tema 1/escenas/game.js
     }
     preload() {
         this.load.image('background', 'images/background.png');
@@ -27,7 +31,11 @@ export class Game extends Phaser.Scene {
     create() {
         //imagenes de fondo
         this.add.image(400, 250, 'background');
+<<<<<<<< Updated upstream:optativa/GAME BETA/escenas/game.js
       
+========
+        this.restartButton.create();
+>>>>>>>> Stashed changes:optativa/Tema 1/escenas/game.js
         //this.gameoverImage = this.add.image(400, 90, 'gameover').setScale(0.5);
         //final del juego
         //this.gameoverImage.visible = false;
@@ -60,6 +68,7 @@ export class Game extends Phaser.Scene {
         })
         //velocidad plataforma
         this.physics.add.collider(this.ball, this.platform, this.platformImpact, null, this);
+<<<<<<<< Updated upstream:optativa/GAME BETA/escenas/game.js
         this.physics.add.collider(this.ball, this.bricks, this.brickImpact, null, this);
         //colisionado
         this.ball.setBounce(1);
@@ -70,7 +79,17 @@ export class Game extends Phaser.Scene {
         //inicializamos scoreboard
         this.scoreboard.create();
         
+========
+>>>>>>>> Stashed changes:optativa/Tema 1/escenas/game.js
         this.physics.add.collider(this.ball, this.bricks, this.brickImpact, null, this);
+        //colisionado
+        this.ball.setBounce(1);
+        //rebote de bola
+        this.physics.world.setBoundsCollision(true, true, true, false);
+        this.ball.setCollideWorldBounds(true);
+        this.platform.setCollideWorldBounds(true);
+        //inicializamos scoreboard
+        this.scoreboard.create();
         //let velocity = 100 * Phaser.Math.Between(1.3, 2);
         //if (Phaser.Math.Between(0, 10) > 5) {
         //    velocity = 0 - velocity;
@@ -80,26 +99,27 @@ export class Game extends Phaser.Scene {
         // this.miGrupo.create(254,244,'bluebrick');
         // this.miGrupo.create(375,232, 'greenbrick');
         // this.miGrupo.create(375,232, 'greenbrick');
+    
     }
     //metodo bola plataforma
     platformImpact(ball, platform) {
         this.scoreboard.incrementPoint(1);
 
-        let relativeImpact = ball.x -platform.x;
-        if(relativeImpact>0.1 && relativeImpact>-0.1){
-          ball.setVelocityX(Phaser.Math.Between(-10,10));
+        let relativeImpact = ball.x - platform.x;
+        if (relativeImpact > 0.1 && relativeImpact > -0.1) {
+            ball.setVelocityX(Phaser.Math.Between(-10, 10));
         }
-        else{
-          ball.setVelocityX(10* relativeImpact);
+        else {
+            ball.setVelocityX(10 * relativeImpact);
         }
     }
     brickImpact(ball, brick) {
         brick.disableBody(true, true);
         this.scoreboard.incrementPoint(1);
         if (this.bricks.countActive() === 0) {
-           // this.congratsImage.visible = true;
-           // this.scene.pause();
-           this.showCongratulations();
+            // this.congratsImage.visible = true;
+            // this.scene.pause();
+            this.showCongratulations();
         }
     }
 
@@ -109,7 +129,11 @@ export class Game extends Phaser.Scene {
             this.platform.setVelocityX(-500);
 
             if (this.ball.getData('glue')) {
+<<<<<<<< Updated upstream:optativa/GAME BETA/escenas/game.js
                 this.ball.setVelocityX(0);
+========
+                this.ball.setVelocityX(500);
+>>>>>>>> Stashed changes:optativa/Tema 1/escenas/game.js
             }
         }
         else if (this.cursors.right.isDown) {
@@ -128,31 +152,39 @@ export class Game extends Phaser.Scene {
 
         else {
             this.platform.setVelocityX(0);
-            
+
         }
         if (this.ball.y > 500) {
             console.log("Fin de partida");
             this.showGameOver();
             //this.gameoverImage.visible = true
-          // if (this.cursors.up.isDown) {
-                
+            // if (this.cursors.up.isDown) {
+
             //}
             //this.bricks.setVisible(false);
 
         }
+<<<<<<<< Updated upstream:optativa/GAME BETA/escenas/game.js
         if (this.ball.getData('glue') && this.cursors.up.isDown) {
+========
+        if (this.ball.getData("glue") && this.cursors.up.isDown) {
+>>>>>>>> Stashed changes:optativa/Tema 1/escenas/game.js
             this.ball.setVelocity(-75, -300);
             this.ball.setData('glue', false);
         }
-        
+
 
 
     }
 
-    showGameOver(){
+    showGameOver() {
         this.scene.start('gameover');
     }
+<<<<<<<< Updated upstream:optativa/GAME BETA/escenas/game.js
     showCongratulations(){
+========
+    showCongratulations() {
+>>>>>>>> Stashed changes:optativa/Tema 1/escenas/game.js
         this.scene.start('congratulations');
     }
 }

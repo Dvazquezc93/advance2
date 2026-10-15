@@ -7,7 +7,7 @@ function SelectorActividades() {
   const [actividad, setActividad] = useState('')
   const [energia, setEnergia] = useState('bajo')
   const [visible, setVisible] = useState(false)
-    const [visible2, setVisible2] = useState(false)
+  const [visible2, setVisible2] = useState(false)
   const [tiempo, setTiempo] = useState(0)
     const recoActividad:Record<string, string[]> = {
         Deporte:["Recueda hidratarte","Haz calentamiento"],
@@ -27,7 +27,7 @@ function SelectorActividades() {
       <button onClick={() => { setActividad('Lectura'); setVisible(true); }}>Lectura</button>
       <button onClick={() => { setActividad('Musica'); setVisible(true); }}>Música</button>
       <button onClick={() => { setActividad('Cocina'); setVisible(true); }}>Cocina</button>
-      <button onClick={() => { setActividad(''); setVisible(false); }}>Reset</button><br></br>
+      <button onClick={() => { setActividad(''); setVisible(false);setVisible2(false) }}>Reset</button><br></br>
       {actividad &&
         (<>
           <p>Selecciona el nivel de energia de tu actividad</p>
