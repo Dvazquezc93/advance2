@@ -1,4 +1,4 @@
-package ceu.dam.ad.pedidos.model;
+ package ceu.dam.ad.pedidos.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

@@ -17,7 +17,7 @@ import lombok.Data;
 @Table(name = "pedido_articulo")
 public class ArticuloPedido {
 	@Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(name = "id_pedido")
 	private Long idPedido;

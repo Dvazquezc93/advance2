@@ -30,16 +30,17 @@ import ListaAlumno from './components/continuando/ListaAlumno.tsx'
 import ListaAlumnosFiltrados from './components/continuando/ListaAlumnosFiltrados.tsx'
 import ListaCompra from './components/continuando/ListaCompra.tsx'
 import CarritoCompra from './components/CarritoCompra.tsx'
+import CarritoCompra2 from './components/CarritoCompra2.tsx'
 
 
 
 function App() {
-    const [texto, setTexto] = useState('')
+    
 
   return (
     <>
-     
-   <CarritoCompra></CarritoCompra>
+      <CarritoCompra2></CarritoCompra2>
+
     </>
     
   )
@@ -106,4 +107,5 @@ export default App
       <SelectorActividades></SelectorActividades>
       <ListaMala></ListaMala>
       <ListaBuena></ListaBuena>
+       <CarritoCompra></CarritoCompra>
     </div>*/}

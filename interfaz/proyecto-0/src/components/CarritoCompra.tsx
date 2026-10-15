@@ -1,4 +1,4 @@
-import { useState } from "react"
+ 
 
 type catalogoProps ={
     id:string
@@ -6,10 +6,10 @@ type catalogoProps ={
     precio:number
 }
 const catalogo:catalogoProps[] =[
-    {id:crypto.randomUUID(), nombre:"Teclado mecánico", precio:45},
-     {id:crypto.randomUUID(), nombre:"Ratón inalámbrico", precio:20},
-      {id:crypto.randomUUID(), nombre:"Monitor 24", precio:24},
-       {id:crypto.randomUUID(), nombre:"Auriculares", precio:35},
+    {id:crypto.randomUUID(), nombre:'Teclado mecánico', precio:45},
+     {id:crypto.randomUUID(), nombre:'Ratón inalámbrico', precio:20},
+      {id:crypto.randomUUID(), nombre:'Monitor 24"', precio:24},
+       {id:crypto.randomUUID(), nombre:'Auriculares', precio:35},
 ]
 
 function CarritoCompra() {
