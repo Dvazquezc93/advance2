@@ -12,6 +12,7 @@ import ceu.dam.ad.pedidos.model.Pedido;
 import ceu.dam.ad.pedidos.service.PedidoException;
 import ceu.dam.ad.pedidos.service.PedidoNotFoundException;
 import ceu.dam.ad.pedidos.service.PedidoService;
+
 @Component
 public class TestPedido {
 	final PedidoService service;

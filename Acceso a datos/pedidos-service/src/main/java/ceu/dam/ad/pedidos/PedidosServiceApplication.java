@@ -12,7 +12,7 @@ public class PedidosServiceApplication {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(PedidosServiceApplication.class, args);
 		TestPedido test = context.getBean(TestPedido.class);
-		
+		test.testCrear();
 		test.testConsultar(3L);
 		
 	}

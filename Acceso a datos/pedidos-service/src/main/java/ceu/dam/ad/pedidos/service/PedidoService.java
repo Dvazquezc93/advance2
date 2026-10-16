@@ -2,8 +2,10 @@ package ceu.dam.ad.pedidos.service;
 
 import java.util.List;
 
-import ceu.dam.ad.pedidos.model.Pedido;
+import org.springframework.stereotype.Service;
 
+import ceu.dam.ad.pedidos.model.Pedido;
+@Service
 public interface PedidoService {
 
 	/** Recibe el id de un pedido y lo consulta en BBDD. Debe devolver el pedido con todos sus datos

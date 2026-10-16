@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 
 import ceu.dam.ad.pedidos.PedidosServiceApplication;
 import ceu.dam.ad.pedidos.dao.ArticuloPedidoRepository;
@@ -13,7 +14,7 @@ import ceu.dam.ad.pedidos.dao.PedidoRepository;
 import ceu.dam.ad.pedidos.model.ArticuloPedido;
 import ceu.dam.ad.pedidos.model.Pedido;
 import jakarta.transaction.Transactional;
-
+@Service
 public class PedidoServiceImp implements PedidoService {
 	@Autowired
 	private PedidoRepository repoP;
