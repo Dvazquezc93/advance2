@@ -13,11 +13,16 @@ const routes: Routes = [
   },
   {
     path: 'places',
+    children:
+    [
+      { path:"",
     loadChildren: () => import('./places/places.module').then( m => m.PlacesPageModule)
   },
   {path: ":placeID",
     loadChildren: () => import('./places/place-detail/place-detail.module').then( m => m.PlaceDetailPageModule)
   }
+  
+]},
 ];
 
 @NgModule({

@@ -30,10 +30,15 @@ console.log('Hola');*/
      console.log('Contenido reemplazado con éxito...');
 })*/
 
-fs.unlink('main.html',(err)=>{
+/*fs.unlink('main.html',(err)=>{
     if (err){
         throw err;
      }
      console.log('Archivo eliminado.');
-})
+})*/
+//metodo sincrono
+console.log("Antes de leer el archivo");
+const archivo = fs.readFileSync('index.html','utf-8');
+console.log(archivo);
+console.log("Después de leer el archivo...");
 

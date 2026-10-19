@@ -1,0 +1,35 @@
+from dataclasses import dataclass
+from validadores import validar_cif
+
+@dataclass(frozen= True)
+class LineaFacturas:
+    concepto:str
+    unidades:int
+    precio_unitario:float
+
+    def __post_init__(self) ->None:
+        if self.unidades <=0 and self.precio_unitario <0 :
+            raise ValueError("Unidades o precio unitario incorrecto")
+    @property
+    def subtotal(self) ->float :
+        return round(self.unidades*self.precio_unitario,2)
+
+
+
+
+@dataclass(frozen= True)
+class factura:
+    numero: int
+    cliente:str
+    cif:str
+    linea: tuple[LineaFacturas,...]
+
+    def __post_init__(self) ->None:
+        validar_cif(self.cif)
+        if not self.cif.strip()  or not self.cliente.strip():
+            raise ValueError("Número y cliente obligatorios")
+        if not self.linea:
+            raise ValueError("Facturas sin lineas comerciales")
+
+    @property
+    def 

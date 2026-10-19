@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PlaceDetailPage } from './place-detail.page';
 
+
 describe('PlaceDetailPage', () => {
   let component: PlaceDetailPage;
   let fixture: ComponentFixture<PlaceDetailPage>;
