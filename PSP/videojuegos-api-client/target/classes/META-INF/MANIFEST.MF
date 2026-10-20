@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
 Java-Version: 21
 Build-Jdk-Spec: 25
-<<<<<<< Updated upstream
-=======
-Implementation-Title: test-spring-peliculas
-Implementation-Version: 0.0.1-SNAPSHOT
->>>>>>> Stashed changes
 Created-By: Maven Integration for Eclipse
 

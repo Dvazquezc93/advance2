@@ -66,6 +66,7 @@ public class VideojuegoApiClientImpl implements VideojuegoApiClient {
 			e.printStackTrace();
 			throw new ApiException("Error consultado Api videojuegos");
 		}
+		return null;
 
 	}
 

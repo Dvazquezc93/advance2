@@ -31,6 +31,9 @@ import ListaAlumnosFiltrados from './components/continuando/ListaAlumnosFiltrado
 import ListaCompra from './components/continuando/ListaCompra.tsx'
 import CarritoCompra from './components/CarritoCompra.tsx'
 import CarritoCompra2 from './components/CarritoCompra2.tsx'
+import SaludoPra from './components/practicas/SaludoPra.tsx'
+import Contacto from './components/practicas/Contacto.tsx'
+import ContactoUnico from './components/practicas/ContactoUnico.tsx'
 
 
 
@@ -39,7 +42,9 @@ function App() {
 
   return (
     <>
-      <CarritoCompra2></CarritoCompra2>
+      <SaludoPra></SaludoPra>
+      <ContactoUnico></ContactoUnico>
+      
 
     </>
     
