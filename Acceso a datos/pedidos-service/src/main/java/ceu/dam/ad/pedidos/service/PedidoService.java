@@ -11,7 +11,7 @@ public interface PedidoService {
 	/** Recibe el id de un pedido y lo consulta en BBDD. Debe devolver el pedido con todos sus datos
 	 * incluyendo sus artículos y sus totales. Lanza PedidoNotFoundException si el pedido no existe
 	 * o PedidoException si hay un error.
-	 * @param idPedido
+	 * @param string
 	 * @return
 	 * @throws PedidoException
 	 * @throws PedidoNotFoundException

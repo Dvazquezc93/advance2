@@ -34,6 +34,9 @@ import CarritoCompra2 from './components/CarritoCompra2.tsx'
 import SaludoPra from './components/practicas/SaludoPra.tsx'
 import Contacto from './components/practicas/Contacto.tsx'
 import ContactoUnico from './components/practicas/ContactoUnico.tsx'
+import Registro from './components/practicas/Registro.tsx'
+import Comentario from './components/practicas/Comentario.tsx'
+import RegistroCompleto from './components/practicas/RegistroCompleto.tsx'
 
 
 
@@ -42,9 +45,7 @@ function App() {
 
   return (
     <>
-      <SaludoPra></SaludoPra>
-      <ContactoUnico></ContactoUnico>
-      
+     <RegistroCompleto></RegistroCompleto>
 
     </>
     
@@ -113,4 +114,8 @@ export default App
       <ListaMala></ListaMala>
       <ListaBuena></ListaBuena>
        <CarritoCompra></CarritoCompra>
+        <SaludoPra></SaludoPra>
+      <ContactoUnico></ContactoUnico>
+      <Registro></Registro>
+      <Comentario></Comentario>
     </div>*/}

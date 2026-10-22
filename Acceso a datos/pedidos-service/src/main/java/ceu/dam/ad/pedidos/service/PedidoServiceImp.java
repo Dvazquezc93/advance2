@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import ceu.dam.ad.pedidos.PedidosServiceApplication;
-import ceu.dam.ad.pedidos.dao.ArticuloPedidoRepository;
+
 import ceu.dam.ad.pedidos.dao.PedidoRepository;
 import ceu.dam.ad.pedidos.model.ArticuloPedido;
 import ceu.dam.ad.pedidos.model.Pedido;
@@ -18,18 +17,15 @@ import jakarta.transaction.Transactional;
 public class PedidoServiceImp implements PedidoService {
 	@Autowired
 	private PedidoRepository repoP;
-	@Autowired
-	private ArticuloPedidoRepository repoA;
 
 	@Override
 	public Pedido consultarPedido(Long idPedido) throws PedidoException, PedidoNotFoundException {
 		try {
 			Optional<Pedido> pedido = repoP.findById(idPedido);
 
-			Pedido pedidoC = pedido
+			return pedido
 					.orElseThrow(() -> new PedidoNotFoundException("No existe el pedido con ese id " + idPedido));
-			pedidoC.setArticulos(repoA.findByIdPedido(idPedido));
-			return pedidoC;
+			
 		} catch (DataAccessException e) {
 			throw new PedidoException("Error con buscando en la base de datos", e);
 		}
@@ -70,13 +66,9 @@ public class PedidoServiceImp implements PedidoService {
 			pedido.setSubtotal(subTotal);
 			pedido.setTotal(total);
 			pedido.setImpuestos(total.subtract(subTotal));
-			repoP.save(pedido);
-			for (ArticuloPedido articuloPedido : pedido.getArticulos()) {
-				//rellenar  id de articulos
-				articuloPedido.setIdPedido(pedido.getIdPedido());
-				repoA.save(articuloPedido);
-			}
-			return pedido;
+			return repoP.save(pedido);
+			
+			
 
 		} catch (DataAccessException e) {
 			throw new PedidoException("Error creando en la base de datos", e);
@@ -87,8 +79,15 @@ public class PedidoServiceImp implements PedidoService {
 
 	@Override
 	public List<Long> buscarPedidosArticulo(String codBarras) throws PedidoException, PedidoNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		 try {
+			 List<Long> pedido = repoP.findByArticulosCodBarras(codBarras).stream().map(a->a.getIdPedido()).distinct().toList();
+			 if (pedido.isEmpty()) {
+				throw new PedidoNotFoundException("No existe el pedido con ese codigo de barras " + codBarras);
+			}
+			 return pedido;
+		} catch (DataAccessException e) {
+			throw new PedidoException("Error creando en la base de datos", e);
+		}
 	}
 
 }

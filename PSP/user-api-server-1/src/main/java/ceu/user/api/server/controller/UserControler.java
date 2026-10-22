@@ -10,6 +10,8 @@ import ceu.dam.ad.test.users.services.UserException;
 import ceu.dam.ad.test.users.services.UserNotFoundException;
 import ceu.dam.ad.test.users.services.UserService;
 import ceu.dam.ad.test.users.services.UserUnauthorizedException;
+import ceu.user.api.server.Dto.ChangeRequestDto;
+import ceu.user.api.server.Dto.LoginRequestDto;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,16 +38,15 @@ public class UserControler {
 		return service.createUser(user);
 	}
 
-	@PutMapping
-	public void changePassword(@RequestParam Long id, @RequestParam String oldPassword,
-			@RequestParam String newPassword) throws UserException, UserUnauthorizedException, UserNotFoundException {
+	@PutMapping("/{id}")
+	public void changePassword(@PathVariable Long id, @RequestBody ChangeRequestDto request ) throws UserException, UserUnauthorizedException, UserNotFoundException {
 
-		service.changePassword(id, oldPassword, newPassword);
+		service.changePassword(id, request.getOldPassword(), request.getNewPassword());
 
 	}
-	@GetMapping
-	public User login(@RequestParam String login, @RequestParam String password)
+	@PostMapping("/login") // login post por seguridad
+	public User login(@RequestBody LoginRequestDto request)
 			throws UserNotFoundException, UserUnauthorizedException, UserException {
-		return service.login(login, password);
+		return service.login(request.getLogin(),request.getPassword());
 	}
 }
