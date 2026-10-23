@@ -1,8 +1,10 @@
 from dataclasses import dataclass
+
 from validadores import validar_cif
 
+
 @dataclass(frozen= True)
-class LineaFacturas:
+class LineaFactura:
     concepto:str
     unidades:int
     precio_unitario:float
@@ -18,11 +20,11 @@ class LineaFacturas:
 
 
 @dataclass(frozen= True)
-class factura:
+class Factura:
     numero: int
     cliente:str
     cif:str
-    linea: tuple[LineaFacturas,...]
+    linea: tuple[LineaFactura,...]
 
     def __post_init__(self) ->None:
         validar_cif(self.cif)
@@ -32,4 +34,6 @@ class factura:
             raise ValueError("Facturas sin lineas comerciales")
 
     @property
-    def 
+    def base_imponible(self)->float:
+        return round(sum(linea.subtotal for linea in self.lineas),2)
+    

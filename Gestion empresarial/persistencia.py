@@ -1,26 +1,32 @@
 from abc import ABC, abstractmethod
-from dominio import factura
+
+from dominio import Factura
+
 
 class RepositorioFactura(ABC):
     @abstractmethod
-    def guardar(self, factura:factura)->None:
+    def guardar(self, factura:Factura)->None:
         ...
     @abstractmethod
-    def busca(self, numero:str)-> factura |None:
+    def buscar(self, numero:str)-> Factura |None:
         ...
-class repositoriMemoria(RepositorioFactura):
+class RepositoriMemoria(RepositorioFactura):
     def __init__(self)->None:
-        self.facturas:dict[str,factura]={}
+        self.facturas:dict[str,Factura]={}
 
-    def guardar(self,facturas:factura)->None:
-        self._facturas[factura.numero]=factura
-    def buscar(self, numero:str)-> factura | None :
+    def guardar(self,facturas:Factura)->None:
+        self._facturas[facturas.numero]=facturas
+    def buscar(self, numero:str)-> Factura | None :
         return self.facturas.get(numero)
 class RepositorioLista(RepositorioFactura):
         def __init__(self):
-            self._facturas:list[factura]=[]
-        def guardar(self, facturas:factura):
+            self._facturas:list[Factura]=[]
+        def guardar(self, facturas:Factura)->None:
             self._facturas=[f for f in self._facturas if f.numero != facturas.numero]
-            self.facturas.append(factura)
-        def buscar(self, numero:str)-> factura | None :
-            self.facturas.           
+            self.facturas.append(facturas)
+            print(self.factura)
+        def buscar(self, numero:str)-> Factura | None :
+            for factura in self._facturas:
+                if factura.numero ==numero:
+                    return factura
+            return None           
