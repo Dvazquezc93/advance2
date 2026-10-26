@@ -18,7 +18,10 @@ export class PlacesPage implements OnInit {
   constructor(private placeServices: Places) { }
 //se lanza al abir la pagina
   ngOnInit() {
-    this.places =this.placeServices.getPlaces()
+    this.places =this.placeServices.getPlaces();
   }
-
+  //método que se ejecuta cada vez que se abre esta pagina
+  ionVieWillEnter(){
+this.places =this.placeServices.getPlaces();
+}
 }
