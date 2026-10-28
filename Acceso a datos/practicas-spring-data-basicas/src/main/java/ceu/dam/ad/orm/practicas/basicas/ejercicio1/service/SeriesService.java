@@ -2,6 +2,8 @@ package ceu.dam.ad.orm.practicas.basicas.ejercicio1.service;
 
 import java.util.List;
 
+import javax.management.ServiceNotFoundException;
+
 import ceu.dam.ad.orm.practicas.basicas.ejercicio1.model.Serie;
 
 public interface SeriesService {
@@ -15,15 +17,17 @@ public interface SeriesService {
 	/** Consulta la serie con el id indicado por parámetro y la devuelve. Tiene que incluir todas sus entidades 
 	 * asociadas. Si la serie no existe, se lanzará SerieNotFoundException. Si hay cualquier otro error, se
 	 * lanzará SeriesServiceException
+	 * @throws ServiceNotFoundException 
 	 */
-	public Serie consultarSerie(Long idSerie) throws SerieNotFoundException, SeriesServiceException;
+	public Serie consultarSerie(Long idSerie) throws SerieNotFoundException, SeriesServiceException, ServiceNotFoundException;
 
 
 	/** Consultará todas las series que contengan en su descripción la palabra indicada en el filtro por
 	 * parámetro. Si no se encuentra ninguna, lanzará SerieNotFoundException. Si hay cualquier otro error, se
 	 * lanzará SeriesServiceException
+	 * @throws ServiceNotFoundException 
 	 */
-	public List<Serie> buscarSeries(String filtroDescripcion) throws SerieNotFoundException, SeriesServiceException;
+	public List<Serie> buscarSeries(String filtroDescripcion) throws SerieNotFoundException, SeriesServiceException, ServiceNotFoundException;
 
 
 	/** Debe eliminar la serie con el id indicado, y todas sus entidades asociadas de bbdd. 
