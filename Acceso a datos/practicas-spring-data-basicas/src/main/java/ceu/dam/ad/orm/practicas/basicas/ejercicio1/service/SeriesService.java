@@ -17,23 +17,23 @@ public interface SeriesService {
 	/** Consulta la serie con el id indicado por parámetro y la devuelve. Tiene que incluir todas sus entidades 
 	 * asociadas. Si la serie no existe, se lanzará SerieNotFoundException. Si hay cualquier otro error, se
 	 * lanzará SeriesServiceException
-	 * @throws ServiceNotFoundException 
+	 *
 	 */
-	public Serie consultarSerie(Long idSerie) throws SerieNotFoundException, SeriesServiceException, ServiceNotFoundException;
+	public Serie consultarSerie(Long idSerie) throws SerieNotFoundException, SeriesServiceException;
 
 
 	/** Consultará todas las series que contengan en su descripción la palabra indicada en el filtro por
 	 * parámetro. Si no se encuentra ninguna, lanzará SerieNotFoundException. Si hay cualquier otro error, se
 	 * lanzará SeriesServiceException
-	 * @throws ServiceNotFoundException 
 	 */
-	public List<Serie> buscarSeries(String filtroDescripcion) throws SerieNotFoundException, SeriesServiceException, ServiceNotFoundException;
+	public List<Serie> buscarSeries(String filtroDescripcion) throws SerieNotFoundException, SeriesServiceException;
 
 
 	/** Debe eliminar la serie con el id indicado, y todas sus entidades asociadas de bbdd. 
 	 * Si hay algún error, lanzará SeriesServiceException.
+	 * 
 	 */
-	public void elimnarSerie(Long idSerie) throws SeriesServiceException;
+	public void elimnarSerie(Long idSerie) throws SeriesServiceException, SerieNotFoundException;
 
 	/** Actualizará la serie que se pasa por parámetro y todas las entidades asociadas que estén modificadas. 
 	 * Si hay algún error, lanzará SeriesServiceException

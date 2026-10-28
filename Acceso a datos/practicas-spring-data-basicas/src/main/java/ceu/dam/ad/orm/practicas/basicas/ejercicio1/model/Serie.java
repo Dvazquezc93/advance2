@@ -3,8 +3,9 @@ package ceu.dam.ad.orm.practicas.basicas.ejercicio1.model;
 import java.util.Date;
 import java.util.List;
 
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,11 +23,11 @@ public class Serie {
 	private Long id;
 	private String descripcion;
 	private Date estreno;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL,fetch= FetchType.EAGER)
 	@JoinColumn(name="id_trailer")
 	private Trailer trailer;
-	@OneToMany
-	@JoinColumn(name ="id_temporada")
+	@OneToMany(cascade = CascadeType.ALL,fetch= FetchType.EAGER)
+	@JoinColumn(name ="id_serie")
 	private List<Temporada> temporadas;
 
 

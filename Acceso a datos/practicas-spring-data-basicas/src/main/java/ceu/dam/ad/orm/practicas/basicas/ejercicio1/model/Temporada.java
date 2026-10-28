@@ -19,7 +19,7 @@ public class Temporada {
 	private Long id;
 	private Integer numero;
 	@OneToMany
-	@JoinColumn(name ="id_episodio")
+	@JoinColumn(name ="id_temporada")
 	private List<Episodio> episodios;
 
 	
