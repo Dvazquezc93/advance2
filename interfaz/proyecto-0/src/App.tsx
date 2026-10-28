@@ -37,6 +37,7 @@ import ContactoUnico from './components/practicas/ContactoUnico.tsx'
 import Registro from './components/practicas/Registro.tsx'
 import Comentario from './components/practicas/Comentario.tsx'
 import RegistroCompleto from './components/practicas/RegistroCompleto.tsx'
+import GestorTareas from './components/practicas/GestorTareas.tsx'
 
 
 
@@ -45,7 +46,8 @@ function App() {
 
   return (
     <>
-     <RegistroCompleto></RegistroCompleto>
+    <GestorTareas></GestorTareas>
+     
 
     </>
     
@@ -118,4 +120,5 @@ export default App
       <ContactoUnico></ContactoUnico>
       <Registro></Registro>
       <Comentario></Comentario>
+      <RegistroCompleto></RegistroCompleto>
     </div>*/}

@@ -1,4 +1,4 @@
-package ceu.dam.psp.videojuegos.client;
+package ceu.dam.psp.videojuegos.test;
 
 import ceu.dam.psp.videojuegos.client.VideojuegoApiClient;
 import ceu.dam.psp.videojuegos.client.VideojuegoApiClientImpl;
