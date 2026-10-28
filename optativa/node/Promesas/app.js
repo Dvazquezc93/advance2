@@ -1,6 +1,6 @@
 const { resolve } = require("node:dns");
 
-const promesaCumplida = false;
+const promesaCumplida = true;
 
 const miPromesa= new Promise ((resolve, reject)=>{
 
@@ -13,6 +13,14 @@ const miPromesa= new Promise ((resolve, reject)=>{
     }, 3000)
 });
 
-miPromesa.then((valor)=>{
+//miPromesa.then((valor)=>{
+//    console.log(valor);
+//});
+const manejarPromesaCumplida= (valor)=>{
     console.log(valor);
-});
+}
+
+const manejarPromesaRechazada= (razonRechazo)=>{
+    console.log(razonRechazo);
+}
+miPromesa.then(manejarPromesaCumplida, manejarPromesaRechazada)

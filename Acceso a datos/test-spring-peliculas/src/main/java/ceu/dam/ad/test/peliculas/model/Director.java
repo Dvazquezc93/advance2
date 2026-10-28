@@ -18,7 +18,7 @@ import lombok.Data;
 @Table(name = "director")
 public class Director {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //si es autogenerado
 	private Long id;
 	private String nombre;
 	@OneToMany(mappedBy ="director")

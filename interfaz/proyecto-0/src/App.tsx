@@ -38,17 +38,21 @@ import Registro from './components/practicas/Registro.tsx'
 import Comentario from './components/practicas/Comentario.tsx'
 import RegistroCompleto from './components/practicas/RegistroCompleto.tsx'
 import GestorTareas from './components/practicas/GestorTareas.tsx'
+import Llamado from './components/Tema 4/Llamado'
+import Buscador from './components/Tema 4/Buscador'
+import Cronometro from './components/Tema 4/Cronometro'
+import ListaUsuarios from './components/Tema 4/ListaUsuarios'
 
 
 
 function App() {
+   
     
-
   return (
     <>
     <GestorTareas></GestorTareas>
-     
-
+    <Cronometro></Cronometro>
+    <ListaUsuarios></ListaUsuarios>
     </>
     
   )

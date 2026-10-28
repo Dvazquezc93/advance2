@@ -1,4 +1,4 @@
-package ceu.user.api.server.Dto;
+package ceu.user.api.server.Dto.request;
 
 import lombok.Data;
 
