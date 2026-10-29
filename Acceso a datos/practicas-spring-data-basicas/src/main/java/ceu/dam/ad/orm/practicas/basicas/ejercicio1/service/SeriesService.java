@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.management.ServiceNotFoundException;
 
-import ceu.dam.ad.orm.practicas.basicas.ejercicio1.model.Serie;
+import org.springframework.stereotype.Service;
 
+import ceu.dam.ad.orm.practicas.basicas.ejercicio1.model.Serie;
+@Service
 public interface SeriesService {
 
 	/** Debe crear la serie y todas sus entidades asociadas en bbdd. Si hay algún error, lanzará 

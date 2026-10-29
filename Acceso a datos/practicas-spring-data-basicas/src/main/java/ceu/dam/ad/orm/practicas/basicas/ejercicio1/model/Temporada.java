@@ -2,7 +2,9 @@ package ceu.dam.ad.orm.practicas.basicas.ejercicio1.model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,7 +20,7 @@ public class Temporada {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Integer numero;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, fetch= FetchType.EAGER)
 	@JoinColumn(name ="id_temporada")
 	private List<Episodio> episodios;
 
