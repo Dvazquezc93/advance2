@@ -1,0 +1,12 @@
+{"contactos":[
+    {"id":"1",
+    "nombre":"Ana García",
+    "teléfono":"600 111 222",
+    "favorito":true
+    },
+    {"id":"2",
+    "nombre":"Luis Pérez",
+    "teléfono":"600 333 444",
+    "favorito":false
+
+    }]}

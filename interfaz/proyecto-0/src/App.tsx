@@ -1,4 +1,5 @@
 
+<<<<<<< Updated upstream
 import { useState } from 'react'
 import './App.css'
 import Aviso from './components/Aviso.tsx'
@@ -42,6 +43,18 @@ import Llamado from './components/Tema 4/Llamado'
 import Buscador from './components/Tema 4/Buscador'
 import Cronometro from './components/Tema 4/Cronometro'
 import ListaUsuarios from './components/Tema 4/ListaUsuarios'
+=======
+import Llamado from "./components/Tema 4/Llamado"
+import Buscador from "./components/Tema 4/Buscador"
+import Cronometro from "./components/Tema 4/Cronometro"
+import ListaUsuarios from "./components/Tema 4/ListaUsuarios"
+import PersonajesR from "./components/practicas/PersonajesR"
+import ProductosR from "./components/practicas/ProductosR"
+import PerrosR from "./components/practicas/PerrosR"
+import ContactosR from "./components/practicas/ContactosR"
+import AgendaR from "./agenda/AgendaR"
+
+>>>>>>> Stashed changes
 
 
 
@@ -49,10 +62,15 @@ function App() {
    
     
   return (
+<<<<<<< Updated upstream
     <>
     <GestorTareas></GestorTareas>
     <Cronometro></Cronometro>
     <ListaUsuarios></ListaUsuarios>
+=======
+   <>
+     <AgendaR></AgendaR>
+>>>>>>> Stashed changes
     </>
     
   )
@@ -124,5 +142,12 @@ export default App
       <ContactoUnico></ContactoUnico>
       <Registro></Registro>
       <Comentario></Comentario>
+<<<<<<< Updated upstream
       <RegistroCompleto></RegistroCompleto>
+=======
+      <Cronometro></Cronometro>
+     <ListaUsuarios></ListaUsuarios>
+     PersonajesR></PersonajesR>
+     <PerrosR></PerrosR>
+>>>>>>> Stashed changes
     </div>*/}
