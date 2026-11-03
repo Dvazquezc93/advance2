@@ -17,6 +17,7 @@ import ceu.user.api.server.Dto.request.LoginRequestDto;
 import ceu.user.api.server.Dto.request.UserCreateRequestDto;
 import ceu.user.api.server.Dto.response.UserResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,7 +42,7 @@ public class UserControler {
 	}
 
 	@PostMapping
-	public UserResponseDto createrUser(@RequestBody UserCreateRequestDto user) throws DuplicateUserException, UserException {
+	public UserResponseDto createrUser( @Valid @RequestBody UserCreateRequestDto user) throws DuplicateUserException, UserException {
 		return mapper.map(service.createUser(mapper.map(user, User.class)), UserResponseDto.class);
 	}
 	@Operation(summary ="cambio de contraseña",description ="Permite cambiar la contraseña de un usuario")
