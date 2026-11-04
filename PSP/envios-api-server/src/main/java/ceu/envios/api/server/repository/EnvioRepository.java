@@ -9,5 +9,6 @@ import java.util.List;
 
 public interface EnvioRepository extends JpaRepository<Envio, Long> {
 List<Envio> findByTemperaturaCelsiusGreatherThan(BigDecimal temperaturaCelsius);
-List<Envio> findByCodigoSeguimientoIN(List<String> codigos);
+List<Envio> findByCodigoSeguimientoIn(List<String> codigos);
+List<Envio> findAllByEstado(String estado);
 }

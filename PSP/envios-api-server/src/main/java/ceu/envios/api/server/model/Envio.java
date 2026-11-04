@@ -2,6 +2,7 @@ package ceu.envios.api.server.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ public class Envio {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String codigoSeguimiento;
-	private LocalDate fechaRegistro;
+	private LocalDateTime fechaRegistro;
 	private BigDecimal pesoKg;
 	private String estado;
 	private BigDecimal temperaturaCelsius;

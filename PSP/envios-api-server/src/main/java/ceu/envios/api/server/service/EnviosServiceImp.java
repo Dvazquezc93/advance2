@@ -1,17 +1,21 @@
 package ceu.envios.api.server.service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import ceu.envios.api.server.model.Envio;
 import ceu.envios.api.server.repository.EnvioRepository;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 @Service
+@RequiredArgsConstructor
 public class EnviosServiceImp implements EnviosService{
-	@Autowired
+	
 	private EnvioRepository repo;
 
 	@Override
@@ -23,43 +27,47 @@ public class EnviosServiceImp implements EnviosService{
 	}
 
 	@Override
+	@Transactional
 	public long actualizarEstadoLoteReciente(List<String> codigos, String nuevoEstado)
 			throws EnvioNoEncontradoException, IllegalArgumentException {
-		try {
+		
 			if (codigos.isEmpty()) {
 				throw new IllegalArgumentException("La lista de codigos esta vacia");
 			}
-			List<Envio> envios =repo.findByCodigoSeguimientoIN(codigos);
+			List<Envio> envios =repo.findByCodigoSeguimientoIn(codigos);
 			if (envios.size()!= codigos.size()) {
-				throw new  EnvioNoEncontradoException("");
+				throw new  EnvioNoEncontradoException("Hay algun pedido que no existe");
 			}
+			envios = envios.stream().filter(e-> e.getFechaRegistro().isAfter(LocalDateTime.now().minusHours(24))).toList();
+			 envios.stream().forEach(e->e.setEstado(nuevoEstado));
+			 repo.saveAll(envios);
+			 return envios.size();
 		
-		} catch (DataAccessException e) {
-			throw new EnvioNoEncontradoException("No se ha podido actualizar el estado",e);
-		}
 	}
 
 	@Override
 	public Envio registrarNuevoEnvio(Envio nuevoEnvio)
 			throws PoliticaTransporteInvalidaException, EstadoEnvioInvalidoException {
-		try {
-			
-		} catch (DataAccessException e) {
-			// TODO: handle exception
-		}
+		
+			if (nuevoEnvio.getPesoKg().compareTo(BigDecimal.valueOf(150))>0) {
+				throw new PoliticaTransporteInvalidaException("El Limite del peso esta por encima");
+			}
+			else if (!nuevoEnvio.getEstado().equals("REGISTRADO")||!nuevoEnvio.getEstado().equals("ENTREGADO")) {
+				throw new EstadoEnvioInvalidoException("El estado del envio no es válido");
+			}
+			nuevoEnvio.setCodigoSeguimiento(UUID.randomUUID().toString());
+			return repo.save(nuevoEnvio);
 	}
 
 	@Override
 	public Envio obtenerEnvioPesadoPrioritario() throws EstadoEnvioInvalidoException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Envio> envios = repo.findAllByEstado("PENDIENTE");
+		if (envios.isEmpty()) {
+			throw new EstadoEnvioInvalidoException("No hay ningún pedido pendiente");
+		}
+		return envios.stream().max((a,b)->a.getPesoKg().compareTo(b.getPesoKg())).get();
 	}
 
-	@Override
-	public Envio registrarNuevoEnvio(Envio nuevoEnvio)
-			throws PoliticaTransporteInvalidaException, EstadoEnvioInvalidoException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 }
