@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import FormularioOpinion from "./components/FormularioOpinion";
+import FormularioOpinion from "./FormularioOpinion";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 
