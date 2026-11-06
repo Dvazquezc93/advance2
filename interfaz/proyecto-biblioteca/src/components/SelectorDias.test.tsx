@@ -13,4 +13,5 @@ describe('SelectorDias', ()=>{
         expect(screen.getByText('Días: 7')).toBeInTheDocument()
         expect(screen.queryByText('Préstamo máximo: 14 días')).not.toBeInTheDocument()
     })
+    
 })

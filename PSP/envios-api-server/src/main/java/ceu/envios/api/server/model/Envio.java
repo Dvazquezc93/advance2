@@ -22,6 +22,6 @@ public class Envio {
 	private LocalDateTime fechaRegistro;
 	private BigDecimal pesoKg;
 	private String estado;
-	private BigDecimal temperaturaCelsius;
+	private Double temperaturaCelsius;
 	
 }

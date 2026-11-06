@@ -23,7 +23,7 @@ public interface EnviosService {
      * @return Lista de envíos que están en riesgo.
      * @throws IllegalArgumentException si la temperatura está fuera de rangos lógicos de control.
      */
-    List<Envio> detectarEnviosEnRiesgoTermico(double limiteTemperatura) throws IllegalArgumentException;
+    List<Envio> detectarEnviosEnRiesgoTermico(Double limiteTemperatura) throws IllegalArgumentException;
 
     /**
      * 2. ACTUALIZACIÓN MASIVA INTELIGENTE
@@ -76,4 +76,6 @@ public interface EnviosService {
      * @throws EstadoEnvioInvalidoException si no hay envíos pendientes
      */
     Envio obtenerEnvioPesadoPrioritario() throws EstadoEnvioInvalidoException;
+
+	
 }

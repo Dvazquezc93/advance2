@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,15 +21,18 @@ import ceu.envios.api.server.service.EnviosService;
 import ceu.envios.api.server.service.EstadoEnvioInvalidoException;
 import ceu.envios.api.server.service.IllegalArgumentException;
 import ceu.envios.api.server.service.PoliticaTransporteInvalidaException;
-import lombok.RequiredArgsConstructor;
 
 @RequestMapping("/envio")
 @RestController
-
 public class EnvioController {
+	private final EnviosService service;
+	
 
-	 private final EnviosService service;
-	private final ModelMapper mapper;
+
+	EnvioController(EnviosService service) {
+		this.service = service;
+		
+	}
 
 
 	@GetMapping("/temperatura")
@@ -37,7 +40,7 @@ public class EnvioController {
 			throws IllegalArgumentException {
 
 		return service.detectarEnviosEnRiesgoTermico(limiteTemperatura).stream()
-				.map(e -> mapper.map(e, EnvioResponseDto.class)).toList();
+				.map(e -> new ModelMapper().map(e, EnvioResponseDto.class)).toList();
 	}
 
 	@PutMapping
@@ -49,12 +52,12 @@ public class EnvioController {
 	@PostMapping
 	public EnvioResponseDto registrarNuevoEnvio(EnvioRequestDto nuevoEnvio)
 			throws PoliticaTransporteInvalidaException, EstadoEnvioInvalidoException {
-		return mapper.map(service.registrarNuevoEnvio(mapper.map(nuevoEnvio, Envio.class)), EnvioResponseDto.class);
+		return new ModelMapper().map(service.registrarNuevoEnvio(new ModelMapper().map(nuevoEnvio, Envio.class)), EnvioResponseDto.class);
 	}
 
 	@GetMapping
 	public EnvioResponseDto obtenerEnvioPesadoPrioritario() throws EstadoEnvioInvalidoException {
-		return mapper.map(service.obtenerEnvioPesadoPrioritario(), EnvioResponseDto.class);
+		return new ModelMapper().map(service.obtenerEnvioPesadoPrioritario(), EnvioResponseDto.class);
 	}
 
 }

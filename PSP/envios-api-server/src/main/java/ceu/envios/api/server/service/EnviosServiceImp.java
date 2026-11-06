@@ -16,14 +16,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EnviosServiceImp implements EnviosService{
 	
-	private EnvioRepository repo;
+	private final EnvioRepository repo;
 
 	@Override
-	public List<Envio> detectarEnviosEnRiesgoTermico(double limiteTemperatura) throws IllegalArgumentException {
+	public List<Envio> detectarEnviosEnRiesgoTermico(Double limiteTemperatura) throws IllegalArgumentException {
 		if(limiteTemperatura>50||limiteTemperatura<-50) {
 			throw new IllegalArgumentException("la temperatura esta fuera del limite");
 		}
-		return repo.findByTemperaturaCelsiusGreatherThan(BigDecimal.valueOf(limiteTemperatura));
+		return repo.findByTemperaturaCelsiusGreaterThan(limiteTemperatura);
 	}
 
 	@Override
