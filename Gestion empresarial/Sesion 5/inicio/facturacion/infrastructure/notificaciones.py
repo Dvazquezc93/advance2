@@ -1,5 +1,4 @@
-from abc import ABC, abstractmethod
-from Facturacion.domain.dominio import Factura
+from facturacion.application.puertos import 
 
 class NotificadorFactura(ABC):
     @abstractmethod

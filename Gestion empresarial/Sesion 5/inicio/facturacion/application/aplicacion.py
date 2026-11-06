@@ -10,4 +10,4 @@ def emitir_factura(factura: Factura, calculador: CalculadorImpuesto,
     repositorio.guardar(factura)
     if notificador is not None:
         notificador.notificar(factura, total)
-    return total
+    return ResultadoEmision()
