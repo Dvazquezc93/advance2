@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Restaurantes de Sevilla</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+ 
+  <ion-list>
+    <ion-item *ngFor ="let restaurant of restaurants" [routerLink]="['/restaurants', restaurant.id]">
+      <ion-avatar slot="start">
+        <ion-img [src]="restaurant.imageURL"></ion-img>
+      </ion-avatar>
+      <ion-label>
+        {{restaurant.title}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -12,6 +12,8 @@ export class Places {
     imageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRs82eBcP9ttK5yoscHgwD1PsImOi_uRI6szQ&usqp=CAU',
     comments: ['Maravillosa torre, preciosa', 'una belleza, impresionante altura']
   },
+
+  
   {
     id: '2',
     title: 'Estatua de la libertad',
