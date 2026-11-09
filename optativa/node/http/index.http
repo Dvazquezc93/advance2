@@ -1,6 +1,11 @@
 ###
-POST http://localhost:3000/
+GET  http://localhost:3000/api/cursos
 ###
-PUT http://localhost:3000/
+POST http://localhost:3000/api/cursos
 ###
-DELETE http://localhost:3000/
+PUT http://localhost:3000/api/cursos
+###
+DELETE http://localhost:3000/api/cursos
+
+###
+PATCH http://localhost:3000/api/cursos

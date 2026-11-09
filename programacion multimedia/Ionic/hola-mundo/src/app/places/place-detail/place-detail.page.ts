@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Places } from '../places';
 import{place} from '../place.model'
 import { Title } from '@angular/platform-browser';
+import { AlertController } from '@ionic/angular/lazy';
 
 
 
@@ -16,7 +17,10 @@ import { Title } from '@angular/platform-browser';
 export class PlaceDetailPage implements OnInit {
   place: place ={id:'',title:'',imageURL:'', comments:[]};
     
-  constructor(private activatedRouted: ActivatedRoute,private Places: Places, private router:Router) { }
+  constructor(private activatedRouted: ActivatedRoute,
+    private Places: Places,
+     private router:Router,
+      private alertCtrl : AlertController) { }
 
   ngOnInit() {
     this.activatedRouted.paramMap.subscribe(paramMap=>{
@@ -27,10 +31,31 @@ export class PlaceDetailPage implements OnInit {
     })
    
   }
- deletePlace() {
-    alert('pulsado borrado')
-    this.Places.deletePlace(this.place.id);
-    this.router.navigate(['/places'])
+ async deletePlace() {
+    const element = await this.alertCtrl.create(
+      {
+        header:'¿Estas seguro de eliminar este lugar?',
+        message: 'ten cuidado',
+        buttons:[{
+          text:'Cancelar',
+          role:'cancel'
+        },{
+          text:'Borrar',
+          handler:()=>{
+           this.Places.deletePlace(this.place.id);
+            this.router.navigate(['/places'])
+          }
+        }
+      ]
     }
+  )
+  await element.present();
+  
+        
+      
+    
+  
+   
 
+}
 }

@@ -4,6 +4,7 @@ import { place} from './place.model'
 
 
 
+
 @Service()
 export class Places {
    private places: place[] = [{
@@ -20,7 +21,8 @@ export class Places {
   {id: '3',
     title: 'Giralda de Sevilla',
     imageURL: 'https://th.bing.com/th/id/OIP.i63CHu7Am0_mzeRShJsRJwHaGB?w=218&h=180&c=7&r=0&o=7&pid=1.7&rm=3',
-    comments: []}]
+    comments: []}
+  ]
     constructor(){ }
 
     getPlaces() { 
@@ -28,7 +30,7 @@ export class Places {
 
     getplace(placeId:String|null) { return{...this.places.find(place=> {return place.id===placeId})}}
 
-    adPlace(title:string, imageURL:string) {
+    addPlace(title:string, imageURL:string) {
       this.places.push({
         title,
         imageURL,
@@ -40,4 +42,5 @@ export class Places {
     deletePlace(placeId:String|undefined) {
      this.places= this.places.filter(place=> {return place.id!=placeId})
     }
+  
 }
