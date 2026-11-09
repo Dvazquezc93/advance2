@@ -8,7 +8,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import ceu.envios.api.server.model.Envio;
-@Service
+
 public interface EnviosService {
 
     /**

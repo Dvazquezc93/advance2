@@ -1,60 +1,4 @@
-
-<<<<<<< Updated upstream
-import { useState } from 'react'
-import './App.css'
-import Aviso from './components/Aviso.tsx'
-import Cabecera from './components/Cabecera.tsx'
-import Catalogo from './components/Catalogo.tsx'
-import InfoPersonal from './components/InfoPersonal'
-import MisHobbies from './components/MisHobbies'
-import Pie from './components/Pie.tsx'
-import Precio from './components/Precio.tsx'
-import Producto from './components/Producto'
-import Saludo from './components/Saludo'
-import SaludoConDatos from './components/SaludoConDatos'
-import Tarjeta from './components/Tarjeta.tsx'
-import Boton from './components/Boton.tsx'
-import Contador from './components/Contador.tsx'
-import MiComponente from './components/continuando/MiComponente.tsx'
-import MostrarOcultar from './components/continuando/MostrarOcultar.tsx'
-import AlternarContenido from './components/continuando/AlternarContenido.tsx'
-import EstadoUsuario from './components/continuando/EstadoUsuario.tsx'
-import EstadoUsuarioArray from './components/continuando/EstadoUsuarioArray.tsx'
-import TextoInfinito from './components/continuando/TextoInfinito.tsx'
-import EjemploImput from './components/continuando/EjemploImput.tsx'
-import EjemploParametros from './components/continuando/EjemploParametros.tsx'
-import EjercicioPractico from './components/SelectorActividades.tsx'
-import SelectorActividades from './components/SelectorActividades.tsx'
-import ListaMala from './components/continuando/ListaMala.tsx'
-import ListaBuena from './components/continuando/ListaBuena.tsx'
-import ListaAlumno from './components/continuando/ListaAlumno.tsx'
-import ListaAlumnosFiltrados from './components/continuando/ListaAlumnosFiltrados.tsx'
-import ListaCompra from './components/continuando/ListaCompra.tsx'
-import CarritoCompra from './components/CarritoCompra.tsx'
-import CarritoCompra2 from './components/CarritoCompra2.tsx'
-import SaludoPra from './components/practicas/SaludoPra.tsx'
-import Contacto from './components/practicas/Contacto.tsx'
-import ContactoUnico from './components/practicas/ContactoUnico.tsx'
-import Registro from './components/practicas/Registro.tsx'
-import Comentario from './components/practicas/Comentario.tsx'
-import RegistroCompleto from './components/practicas/RegistroCompleto.tsx'
-import GestorTareas from './components/practicas/GestorTareas.tsx'
-import Llamado from './components/Tema 4/Llamado'
-import Buscador from './components/Tema 4/Buscador'
-import Cronometro from './components/Tema 4/Cronometro'
-import ListaUsuarios from './components/Tema 4/ListaUsuarios'
-=======
-import Llamado from "./components/Tema 4/Llamado"
-import Buscador from "./components/Tema 4/Buscador"
-import Cronometro from "./components/Tema 4/Cronometro"
-import ListaUsuarios from "./components/Tema 4/ListaUsuarios"
-import PersonajesR from "./components/practicas/PersonajesR"
-import ProductosR from "./components/practicas/ProductosR"
-import PerrosR from "./components/practicas/PerrosR"
-import ContactosR from "./components/practicas/ContactosR"
 import AgendaR from "./agenda/AgendaR"
-
->>>>>>> Stashed changes
 
 
 
@@ -62,15 +6,10 @@ function App() {
    
     
   return (
-<<<<<<< Updated upstream
+
     <>
-    <GestorTareas></GestorTareas>
-    <Cronometro></Cronometro>
-    <ListaUsuarios></ListaUsuarios>
-=======
-   <>
-     <AgendaR></AgendaR>
->>>>>>> Stashed changes
+    <AgendaR></AgendaR>
+
     </>
     
   )

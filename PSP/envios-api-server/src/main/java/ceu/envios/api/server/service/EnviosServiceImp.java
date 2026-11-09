@@ -23,7 +23,7 @@ public class EnviosServiceImp implements EnviosService{
 		if(limiteTemperatura>50||limiteTemperatura<-50) {
 			throw new IllegalArgumentException("la temperatura esta fuera del limite");
 		}
-		return repo.findByTemperaturaCelsiusGreaterThan(limiteTemperatura);
+		return repo. findByEstadoAndTemperaturaCelsiusGreaterThan("EN_TRANSITO",limiteTemperatura);
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class EnviosServiceImp implements EnviosService{
 	public long actualizarEstadoLoteReciente(List<String> codigos, String nuevoEstado)
 			throws EnvioNoEncontradoException, IllegalArgumentException {
 		
-			if (codigos.isEmpty()) {
+			if (codigos.isEmpty()|| codigos==null) {
 				throw new IllegalArgumentException("La lista de codigos esta vacia");
 			}
 			List<Envio> envios =repo.findByCodigoSeguimientoIn(codigos);
@@ -39,7 +39,7 @@ public class EnviosServiceImp implements EnviosService{
 				throw new  EnvioNoEncontradoException("Hay algun pedido que no existe");
 			}
 			envios = envios.stream().filter(e-> e.getFechaRegistro().isAfter(LocalDateTime.now().minusHours(24))).toList();
-			 envios.stream().forEach(e->e.setEstado(nuevoEstado));
+			 envios.forEach(e->e.setEstado(nuevoEstado));
 			 repo.saveAll(envios);
 			 return envios.size();
 		
@@ -49,10 +49,10 @@ public class EnviosServiceImp implements EnviosService{
 	public Envio registrarNuevoEnvio(Envio nuevoEnvio)
 			throws PoliticaTransporteInvalidaException, EstadoEnvioInvalidoException {
 		
-			if (nuevoEnvio.getPesoKg().compareTo(BigDecimal.valueOf(150))>0) {
+			if (nuevoEnvio.getPesoKg().compareTo(BigDecimal.valueOf(1500))>0) {
 				throw new PoliticaTransporteInvalidaException("El Limite del peso esta por encima");
 			}
-			else if (!nuevoEnvio.getEstado().equals("REGISTRADO")||!nuevoEnvio.getEstado().equals("ENTREGADO")) {
+			else if (!nuevoEnvio.getEstado().equals("REGISTRADO")&&!nuevoEnvio.getEstado().equals("EN_ALMACEN")) {
 				throw new EstadoEnvioInvalidoException("El estado del envio no es válido");
 			}
 			nuevoEnvio.setCodigoSeguimiento(UUID.randomUUID().toString());

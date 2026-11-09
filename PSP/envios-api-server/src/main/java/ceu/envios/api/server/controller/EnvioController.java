@@ -50,7 +50,7 @@ public class EnvioController {
 	}
 
 	@PostMapping
-	public EnvioResponseDto registrarNuevoEnvio(EnvioRequestDto nuevoEnvio)
+	public EnvioResponseDto registrarNuevoEnvio(@RequestBody EnvioRequestDto nuevoEnvio)
 			throws PoliticaTransporteInvalidaException, EstadoEnvioInvalidoException {
 		return new ModelMapper().map(service.registrarNuevoEnvio(new ModelMapper().map(nuevoEnvio, Envio.class)), EnvioResponseDto.class);
 	}
