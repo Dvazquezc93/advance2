@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Laboratorio · GrapesJS</title>
+<link rel="stylesheet" href="grapesjs/css/grapes.min.css">
+<style>body{margin:0} .gjs-block{width:auto}</style>
+</head>
+<body>
+<div id="gjs">
+  <h1>Hola mundo</h1>
+  <p>Esta página la estás editando con GrapesJS.</p>
+</div>
+<script src="grapesjs/grapes.min.js"></script>
+<script type="module">
+  import es from './grapesjs/es.js';
+
+  const editor = grapesjs.init({
+    container: '#gjs',
+    height: '100vh',
+    width: 'auto',
+    fromElement: true,
+    storageManager: false,
+    i18n: { locale: 'es', messages: { es } },
+    cssIcons: 'fa/css/font-awesome.min.css',
+    blockManager: {
+      blocks: [
+        { id: 'section', label: 'Sección', category: 'Básico',
+          content: { tagName: 'section', name: 'Sección', components: '<h2>Título de la sección</h2><p>Texto de la sección.</p>' } },
+        { id: 'text', label: 'Texto', category: 'Básico', content: '<div data-gjs-type="text">Texto editable</div>' },
+        { id: 'button', label: 'Botón', category: 'Básico',
+          content: { tagName: 'button', type: 'text', name: 'Botón', components: 'Pulsa aquí' } }
+      ]
+    }
+  });
+  window.editor = editor;
+</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "tareas": [
+    { "id": "1", "texto": "Revisar el pedido de material", "prioridad": "alta", "hecha": false },
+    { "id": "2", "texto": "Llamar al proveedor", "prioridad": "media", "hecha": false },
+    { "id": "3", "texto": "Ordenar el almacén", "prioridad": "baja", "hecha": true },
+    { "id": "4", "texto": "Preparar la reunión", "prioridad": "media", "hecha": false },
+    { "id": "5", "texto": "Pagar las facturas", "prioridad": "alta", "hecha": true },
+    { "id": "6", "texto": "Actualizar el inventario", "prioridad": "baja", "hecha": false }
+  ]
+}
