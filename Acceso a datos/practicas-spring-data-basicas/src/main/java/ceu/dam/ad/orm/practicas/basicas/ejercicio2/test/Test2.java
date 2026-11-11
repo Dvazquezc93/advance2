@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import ceu.dam.ad.orm.practicas.basicas.ejercicio2.model.Articulo;
 import ceu.dam.ad.orm.practicas.basicas.ejercicio2.model.Cliente;
 import ceu.dam.ad.orm.practicas.basicas.ejercicio2.model.Pedido;
@@ -11,9 +14,11 @@ import ceu.dam.ad.orm.practicas.basicas.ejercicio2.model.PedidoLinea;
 import ceu.dam.ad.orm.practicas.basicas.ejercicio2.service.NotFoundException;
 import ceu.dam.ad.orm.practicas.basicas.ejercicio2.service.PedidosClientesService;
 import ceu.dam.ad.orm.practicas.basicas.ejercicio2.service.PedidosClientesServiceImpl;
-
+@Component
 public class Test2 {
-
+	@Autowired
+	private PedidosClientesServiceImpl service;
+	
 	public void test() {
 //		-- Para limpiar la bbdd después de cada prueba:
 //		DELETE FROM PEDIDO_LINEAS;
@@ -21,8 +26,6 @@ public class Test2 {
 //		DELETE FROM CLIENTE;
 //		DELETE FROM ARTICULO WHERE ID > 7;		
 		
-		
-		PedidosClientesService service = new PedidosClientesServiceImpl();
 		try {
 			// Test crear articulo
 			Articulo articuloNuevo = new Articulo();
