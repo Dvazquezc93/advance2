@@ -22,11 +22,12 @@ public class PedidoLinea {
 	@Id
 	@GeneratedValue
 	@JdbcTypeCode(Types.VARCHAR)
+	@Column(name ="uuid_linea_pedido")
 	private UUID uidLinea;
 	private Integer numLinea;
 	private Integer cantidad;
 	@ManyToOne
-	@JoinColumn(name ="id_articulo")
+	@JoinColumn(name ="id_articulo", nullable=false)
 	private Articulo articulo;
 
 	

@@ -1,0 +1,45 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: silex_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: silex_app
+      MYSQL_USER: silexuser
+      MYSQL_PASSWORD: silex123456
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  silex:
+    image: php:7.4-apache
+    container_name: silex_app
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: silex_app
+      DB_USER: silexuser
+      DB_PASSWORD: silex123456
+      # Apunta DocumentRoot de Apache a la carpeta pública de Silex
+      APACHE_DOCUMENT_ROOT: /var/www/html/web
+    volumes:
+      # Monta tu carpeta local del proyecto Silex dentro del contenedor
+      - ./:/var/www/html
+    command: >
+      bash -c "
+      docker-php-ext-install pdo pdo_mysql &&
+      a2enmod rewrite &&
+      sed -ri -e 's!/var/www/html!/var/www/html/web!g' /etc/apache2/sites-available/*.conf &&
+      sed -ri -e 's!/var/www/!/var/www/html/web!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf &&
+      apache2-foreground
+      "
+
+volumes:
+  db_data:

@@ -1,7 +1,11 @@
 package ceu.dam.ad.orm.practicas.basicas.ejercicio3.modelo;
 
-public class Pais {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
+@Entity
+public class Pais {
+	@Id
 	private String codigo;
 	private String descripcion;
 	

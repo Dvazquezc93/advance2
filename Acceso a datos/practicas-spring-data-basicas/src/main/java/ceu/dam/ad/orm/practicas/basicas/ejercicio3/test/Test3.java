@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import org.springframework.stereotype.Component;
+
 import ceu.dam.ad.orm.practicas.basicas.ejercicio3.modelo.CentroComercial;
 import ceu.dam.ad.orm.practicas.basicas.ejercicio3.modelo.Marca;
 import ceu.dam.ad.orm.practicas.basicas.ejercicio3.modelo.Pais;
@@ -14,7 +16,7 @@ import ceu.dam.ad.orm.practicas.basicas.ejercicio3.service.ComercialService;
 import ceu.dam.ad.orm.practicas.basicas.ejercicio3.service.ComercialServiceImpl;
 import ceu.dam.ad.orm.practicas.basicas.ejercicio3.service.NotFoundException;
 
-
+@Component
 public class Test3 {
 	// CADA VEZ QUE EJECUTES EL TEST, PASA ESTE SCRIPT EN BBDD:
 //	DELETE FROM centro_comercial_marcas;
