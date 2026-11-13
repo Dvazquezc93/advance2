@@ -24,7 +24,7 @@ const servidor = http.createServer((req, res) => {
 })
 
 servidor.listen(puerto, () => {
-    console.log('El servidor esta ecuchando está escuchando en http://localhost:' + puerto + '...')
+    console.log('El servidor está escuchando en http://localhost:' + puerto + '...')
 })
 
 
@@ -51,9 +51,25 @@ function  gestionarSolicitudGET(req, res) {
     }
 function  gestionarSolicitudPOST(req, res) {
     const path =req.url
-    if(path==='/api/cursos'){
-        res.statusCode =200
-        return res.end('El servido recibió una solicitud POST para /cursos/programacion')
+    if(path==='/api/cursos/programacion'){
+        let cuerpo =""
+        req.on('data', contenido =>{
+            cuerpo+=contenido.toString()
+        })
+
+        req.on('end',()=>{
+            console.log(cuerpo)
+            console.log(typeof cuerpo)
+            cuerpo= JSON.parse(cuerpo)
+            console.log(typeof cuerpo)
+            console.log("T´tulo cambiado: "+cuerpo.titulo)
+            return res.end('El servido recibió una solicitud POST para /cursos/programacion')
+           
+        })
+
+        // res.statusCode =200
+
+        // return res.end('El servido recibió una solicitud POST para /cursos/programacion')
     }
 }
 

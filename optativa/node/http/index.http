@@ -9,3 +9,10 @@ DELETE http://localhost:3000/api/cursos
 
 ###
 PATCH http://localhost:3000/api/cursos
+###
+POST http://localhost:3000/api/cursos/programacion
+Content-Type: application/json
+
+{
+    "titulo":"Aprende Node.js"
+}
