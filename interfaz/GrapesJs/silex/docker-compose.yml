@@ -1,0 +1,19 @@
+# Silex en local: http://localhost:6805
+# Los sitios y los datos se guardan en volúmenes con nombre.
+name: silex-prueba
+
+services:
+  silex:
+    image: silexlabs/silex
+    platform: linux/amd64   # la imagen solo existe para amd64 (en Mac con chip Apple se emula)
+    # crea las carpetas donde Silex escribe el sitio al publicar (en un volumen vacío no existen)
+    command: sh -c "mkdir -p /silex/silex/hosting/css /silex/silex/hosting/assets && npm start"
+    ports:
+      - 6805:6805
+    volumes:
+      - silex_storage:/silex/silex/storage
+      - silex_hosting:/silex/silex/hosting
+
+volumes:
+  silex_storage:
+  silex_hosting:
