@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>Restaurantes de Sevilla</ion-title>
+    <ion-title>{{titulo}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -16,4 +16,11 @@
       </ion-label>
     </ion-item>
   </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="danger" (click)="newRestaurant()">
+      <ion-icon name ="add"></ion-icon><p>New</p>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>

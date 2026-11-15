@@ -20,7 +20,7 @@ const routes: Routes = [
   {
     path:':restaurantID',
     loadChildren: ()=> import("./restaurants/restaurant-detail/restaurant-detail.module").then(m=>m.RestaurantDetailPageModule)
-  }]}];
+  }]},] 
 
 @NgModule({
   imports: [
