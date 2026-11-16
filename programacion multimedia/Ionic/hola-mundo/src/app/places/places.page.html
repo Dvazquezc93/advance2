@@ -1,12 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title> {{titulo}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToHome()">
+      <ion-icon name="globe" class="mi-clase"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ion-item *ngFor="let place of places" [routerLink]="['/places',place.id]">
+    <ion-item *ngFor="let place of places()" [routerLink]="['/places',place.id]">
       <ion-avatar slot ="start">
         <ion-img [src]="place.imageURL" ></ion-img>
       </ion-avatar>

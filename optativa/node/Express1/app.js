@@ -21,6 +21,10 @@ app.get('/api/cursos/programacion/:lenguaje',(req,res)=>{
     if(resultados.length===0){
         return res.status(404).send("no se encontraron curso de "+lenguaje)
     }
+    //ordena de menor a mayor
+     if(req.query.ordenar ==='vistas'){
+        return res.send(JSON.stringify(resultados.sort((a,b)=>a.vistas - b.vistas  )))
+    }
     res.send(JSON.stringify(resultados))
 })
 app.get('/api/cursos/matematicas/:tema',(req,res)=>{
@@ -39,8 +43,10 @@ app.get('/api/cursos/programacion/:lenguaje/:nivel',(req,res)=>{
     if(resultados.length===0){
         return res.status(404).send("no se encontraron curso de "+lenguaje)
     }
-   
-    console.log(req.params.ordenar)
+   //ordenar mayor a menos 
+    if(req.query.ordenar ==='vistas'){
+        return res.send(JSON.stringify(resultados.sort((a,b)=> b.vistas - a.vistas)))
+    }
      res.send(JSON.stringify(resultados))
    
 })

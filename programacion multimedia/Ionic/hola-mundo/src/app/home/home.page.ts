@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { Photos } from './photos';
+import { photo } from './photo.model';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +9,16 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class HomePage {
+  photos= signal<photo[]>([])
 
-  constructor() {}
-
+  titulo:string ="Listado de Imágenes"
+  constructor(private photosServices:Photos) {}
+ ngOnInit(){
+   this.photosServices.getPhotos().subscribe(data=>{
+    console.log(data)
+    this.photos.set(data as [])
+  })
+ }
+ ionViewDidEnter(){
+ }
 }
