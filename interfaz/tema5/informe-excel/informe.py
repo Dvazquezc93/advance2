@@ -10,6 +10,7 @@ with open("datos/ventas.json", encoding="utf-8") as f:
 libro = xlsxwriter.Workbook("ventas.xlsx")
 hoja = libro.add_worksheet("Ventas")
 negrita_gris = libro.add_format({"bold": True, "bg_color": "#E8E8E8"})
+azul_claro = libro.add_format({"bold": True, "bg_color": "#21A7E6"})
 numero = libro.add_format({"num_format": "#,##0.00"})
 euros = libro.add_format({"num_format": '#,##0.00 "€"'})
 euros_negrita = libro.add_format({"num_format": '#,##0.00 "€"', "bold": True})
@@ -17,7 +18,7 @@ negrita = libro.add_format({"bold": True})
 
 # 3. Cabecera, anchos, filtro y fila fija
 cabecera = ["Fecha", "Categoría", "Producto", "Importe", "Unidades", "Subtotal"]
-hoja.write_row(0, 0, cabecera, negrita_gris)
+hoja.write_row(0, 0, cabecera, azul_claro)
 for columna, ancho in enumerate([12, 14, 22, 12, 10, 14]):
     hoja.set_column(columna, columna, ancho)
 hoja.autofilter(0, 0, len(ventas), 5)
@@ -43,9 +44,10 @@ hoja.write_formula(ultima, 5, f"=SUM(F2:F{ultima})", euros_negrita, total_euros)
 
 # 6. Segunda hoja «Resumen»: total por categoría con SUMIF
 resumen = libro.add_worksheet("Resumen")
-resumen.write_row(0, 0, ["Categoría", "Total"], negrita_gris)
+resumen.write_row(0, 0, ["Categoría", "Total", "Ventas"], azul_claro)
 resumen.set_column(0, 0, 16)
 resumen.set_column(1, 1, 14)
+resumen.set_column(2, 2, 14)
 categorias = list(dict.fromkeys(v["categoria"] for v in ventas))
 for i, c in enumerate(categorias, start=1):
     resumen.write(i, 0, c)

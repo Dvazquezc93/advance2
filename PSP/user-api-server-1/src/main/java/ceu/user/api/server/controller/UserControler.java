@@ -17,6 +17,8 @@ import ceu.user.api.server.Dto.request.LoginRequestDto;
 import ceu.user.api.server.Dto.request.UserCreateRequestDto;
 import ceu.user.api.server.Dto.response.UserResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @RequestMapping("/user")
 @RestController
+@SecurityRequirement(name="ApiKeyAuth")
 public class UserControler {
 	final UserService service;
 	private final  ModelMapper mapper;

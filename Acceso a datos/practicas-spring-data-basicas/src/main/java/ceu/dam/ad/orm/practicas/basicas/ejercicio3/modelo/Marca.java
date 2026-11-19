@@ -18,7 +18,7 @@ public class Marca {
 	
 	private String nombreComercial;
 	
-	@ManyToMany
+	@ManyToOne
 	@JoinColumn(name="cod_pais", nullable =false)
 	private Pais pais;
 	

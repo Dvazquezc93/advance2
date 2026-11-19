@@ -15,6 +15,7 @@ import ceu.dam.ad.orm.practicas.basicas.ejercicio3.repository.CentroComercialRep
 import ceu.dam.ad.orm.practicas.basicas.ejercicio3.repository.MarcaRepository;
 import ceu.dam.ad.orm.practicas.basicas.ejercicio3.repository.PaisRepository;
 import ceu.dam.ad.orm.practicas.basicas.ejercicio3.repository.TiendaRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class ComercialServiceImpl implements ComercialService {
@@ -49,6 +50,7 @@ public class ComercialServiceImpl implements ComercialService {
 	}
 
 	@Override
+	@Transactional
 	public void insertarCentroComercial(CentroComercial cc) throws ComercialException {
 		try {
 
@@ -91,6 +93,7 @@ public class ComercialServiceImpl implements ComercialService {
 	}
 
 	@Override
+	@Transactional
 	public void borrarCentroComercial(String uuidCentro) throws ComercialException {
 		try { 
 			UUID uId =UUID.fromString(uuidCentro);

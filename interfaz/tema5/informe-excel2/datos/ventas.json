@@ -1,0 +1,18 @@
+[
+  {"fecha": "2026-01-05", "categoria": "Electrónica", "producto": "Auriculares", "importe": 45.90, "unidades": 3},
+  {"fecha": "2026-01-12", "categoria": "Hogar", "producto": "Lámpara LED", "importe": 22.50, "unidades": 5},
+  {"fecha": "2026-01-18", "categoria": "Electrónica", "producto": "Cargador USB-C", "importe": 15.00, "unidades": 8},
+  {"fecha": "2026-01-22", "categoria": "Deporte", "producto": "Botella térmica", "importe": 18.90, "unidades": 4},
+  {"fecha": "2026-02-02", "categoria": "Hogar", "producto": "Set de toallas", "importe": 34.00, "unidades": 2},
+  {"fecha": "2026-02-09", "categoria": "Electrónica", "producto": "Ratón inalámbrico", "importe": 19.99, "unidades": 6},
+  {"fecha": "2026-02-14", "categoria": "Deporte", "producto": "Esterilla yoga", "importe": 24.90, "unidades": 3},
+  {"fecha": "2026-02-21", "categoria": "Hogar", "producto": "Lámpara LED", "importe": 22.50, "unidades": 7},
+  {"fecha": "2026-03-03", "categoria": "Electrónica", "producto": "Auriculares", "importe": 45.90, "unidades": 5},
+  {"fecha": "2026-03-10", "categoria": "Deporte", "producto": "Mancuernas 2kg", "importe": 29.90, "unidades": 2},
+  {"fecha": "2026-03-15", "categoria": "Hogar", "producto": "Set de toallas", "importe": 34.00, "unidades": 4},
+  {"fecha": "2026-03-25", "categoria": "Electrónica", "producto": "Cargador USB-C", "importe": 15.00, "unidades": 10},
+  {"fecha": "2026-04-02", "categoria": "Deporte", "producto": "Botella térmica", "importe": 18.90, "unidades": 6},
+  {"fecha": "2026-04-08", "categoria": "Electrónica", "producto": "Ratón inalámbrico", "importe": 19.99, "unidades": 3},
+  {"fecha": "2026-04-19", "categoria": "Hogar", "producto": "Lámpara LED", "importe": 22.50, "unidades": 4},
+  {"fecha": "2026-04-27", "categoria": "Deporte", "producto": "Esterilla yoga", "importe": 24.90, "unidades": 5}
+]
