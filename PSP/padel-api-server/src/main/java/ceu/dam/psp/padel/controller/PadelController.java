@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import ceu.dam.psp.padel.dto.request.JugadorRequestDto;
 import ceu.dam.psp.padel.dto.request.PartidoRequestDto;
@@ -23,9 +24,11 @@ import ceu.dam.psp.padel.model.Jugador;
 import ceu.dam.psp.padel.model.Partido;
 import ceu.dam.psp.padel.service.JugadorFiltro;
 import ceu.dam.psp.padel.service.PadelService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
-
-@RequestMapping("/api/")
+@RestController
+@RequestMapping("/api")
+@SecurityRequirement(name = "Autor")
 public class PadelController {
 	@Autowired
 	private PadelService service;
@@ -57,32 +60,40 @@ public class PadelController {
 	}
 	@PostMapping("/jugadores/{idOrganizador}/partidos")
 	public String crearPartido(@Valid @RequestBody PartidoRequestDto partido, @PathVariable Long idOrganizador) throws PadelNotFoundException {
-			Jugador j= service.consultarJugador(idOrganizador);
+			if (service.consultarJugador(idOrganizador)==null) {
+				throw new PadelNotFoundException("Ese jugador no existe");
+			}
 			if (partido.getFecha().equals(null)) {
 				partido.setFecha(LocalDate.now());
 			}
 			Partido p=service.crearPartido(partido.getFecha(), partido.getHora(), partido.getIndividuales(), idOrganizador);
 		return p.getCodigo();
 	}
-	@PutMapping("/patidosdos/{idJugador}/jugadores/{codigo}")
-	public List<PartidoResponseDto> addJugador(@PathVariable Long idJugador, @PathVariable String codigo) throws PadelNotFoundException, PadelInvalidException {
+	@PutMapping("/partidos/{idJugador}/jugadores/{codigo}")
+	public List<JugadorResponseDto> addJugador(@PathVariable Long idJugador, @PathVariable String codigo) throws PadelNotFoundException, PadelInvalidException {
 		Partido p =service.consultarPartido(codigo);
 		Jugador j = service.consultarJugador(idJugador);
+		if (p ==null) {
+			throw new PadelNotFoundException("El partido no existe");
+		}
+		if (j==null) {
+			throw new PadelNotFoundException("El jugador no existe");
+		}
 		if (p.getJugadores().contains(j)) {
 			throw new PadelInvalidException("El jugador ya esta en ese partido");
 		}
-		else if ((p.getIndividuales() && p.getJugadores().size()==2)||(!p.getIndividuales() && p.getJugadores().size()==4)) {
+		 if ((p.getIndividuales() && p.getJugadores().size()==2)||(!p.getIndividuales() && p.getJugadores().size()==4)) {
 			throw new PadelInvalidException("El partido esta completo");
 		}
 		p.getJugadores().add(j);
 		 service.actualizarJugadoresPartido(codigo, p.getJugadores());
 		 List<Jugador> ju = p.getJugadores();
-		 return  ju.stream().map(j-> new ModelMapper().map(j, JugadorResponseDto.class)).toList();
+		 return  ju.stream().map(jug-> new ModelMapper().map(jug, JugadorResponseDto.class)).toList();
 	}
-
-	public List<Jugador> buscarJugadores(JugadorFiltro filtro) {
+	@GetMapping("/jugadores/buscar")
+	public List<JugadorResponseDto> buscarJugadores(@RequestParam JugadorFiltro filtro) {
 		// TODO Auto-generated method stub
-		return null;
+		return service.buscarJugadores(filtro).stream().map( j -> new ModelMapper().map(j, JugadorResponseDto.class)).toList();
 	}
 
 }

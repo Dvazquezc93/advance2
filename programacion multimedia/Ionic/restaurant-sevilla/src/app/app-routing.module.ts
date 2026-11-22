@@ -13,14 +13,21 @@ const routes: Routes = [
   },
   {
     path: 'restaurants',
-    children:[{
-      path:"",
-      loadChildren: ()=> import("./restaurants/restaurant.module").then(m=> m.RestaurantPageModule)
-    },
-  {
-    path:':restaurantID',
-    loadChildren: ()=> import("./restaurants/restaurant-detail/restaurant-detail.module").then(m=>m.RestaurantDetailPageModule)
-  }]},] 
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./restaurants/restaurant.module').then(m => m.RestaurantPageModule)
+      },
+      {
+        path: 'restaurant-add',
+        loadChildren: () => import('./restaurants/restaurant-add/restaurant-add.module').then(m => m.RestaurantAddPageModule)
+      },
+      {
+        path: ':restaurantID',
+        loadChildren: () => import('./restaurants/restaurant-detail/restaurant-detail.module').then(m => m.RestaurantDetailPageModule)
+      }
+    ]
+  },] 
 
 @NgModule({
   imports: [

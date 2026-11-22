@@ -1,39 +1,81 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-button slot="start">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
       <ion-back-button defaultHref="/restaurants"></ion-back-button>
-    </ion-button>
-    <ion-button color="danger" slot="end" (click)="deletePlace()">
-      <ion-icon name="trash-outline">
-      </ion-icon>
-    </ion-button>
-    <ion-title>{{restaurant.title}}</ion-title>
+    </ion-buttons>
+    <ion-title>{{restaurant.nombre}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="deletePlace()">
+        <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-grid>
+<ion-content [fullscreen]="true" class="detalle-sevilla-bg">
+  <ion-grid class="ion-no-padding">
+    <!-- Imagen completa arriba -->
     <ion-row>
-      <ion-col>
-        <ion-img style="width: 1200px;height: 1200px; " [src]="restaurant.imageURL">
-          
-        </ion-img>
+      <ion-col class="ion-no-padding">
+        <ion-img class="restaurant-img" [src]="restaurant.imageURL"></ion-img>
       </ion-col>
     </ion-row>
-    <ion-row>
-    <ion-col>
-      <h1 class="ion-text-center">{{restaurant.title}}</h1>
-    </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-list>
-          <ion-item *ngFor="let comment of restaurant.comments"> {{comment}}</ion-item>
-        </ion-list>
-        <ng-template #nocoments>
-          <p class ="ion-text-center">No hay comentarios todavía...</p>
-        </ng-template>
-      </ion-col>
-    </ion-row>
+
+    <div class="contenedor-cuerpo">
+      <!-- Nombre -->
+      <ion-row>
+        <ion-col>
+          <h1 class="titulo-sevillano ion-text-center">{{restaurant.nombre}}</h1>
+          <div class="divisor-albero"></div>
+        </ion-col>
+      </ion-row>
+
+      <!-- Información básica -->
+      <ion-row class="info-basica">
+        <ion-col class="ion-padding">
+          <p *ngIf="restaurant.direccion"><strong>Dirección:</strong> {{restaurant.direccion}}</p>
+          <p *ngIf="restaurant.telefono"><strong>Teléfono:</strong> {{restaurant.telefono}}</p>
+          <p *ngIf="restaurant.numeroTenedores"><strong>Categoría:</strong> {{restaurant.numeroTenedores}}</p>
+          <p *ngIf="restaurant.descripcion" class="descripcion-texto">{{restaurant.descripcion}}</p>
+        </ion-col>
+      </ion-row>
+
+      <!-- Carta básica -->
+      <ion-row *ngIf="restaurant.cartaBasica" class="bloque-carta">
+        <ion-col>
+          <ion-list lines="inset" class="lista-carta">
+            <ion-list-header class="cabecera-seccion">
+              <ion-label>Carta Básica</ion-label>
+            </ion-list-header>
+            <ion-item *ngFor="let entrante of restaurant.cartaBasica.entrantes">
+              <ion-label><strong>Entrante:</strong> {{entrante}}</ion-label>
+            </ion-item>
+            <ion-item *ngFor="let principal of restaurant.cartaBasica.platosPrincipales">
+              <ion-label><strong>Principal:</strong> {{principal}}</ion-label>
+            </ion-item>
+            <ion-item *ngFor="let postre of restaurant.cartaBasica.postres">
+              <ion-label><strong>Postre:</strong> {{postre}}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <!-- Comentarios -->
+      <ion-row class="bloque-comentarios">
+        <ion-col>
+          <ion-list *ngIf="restaurant.comments?.length; else nocoments" class="lista-comentarios">
+            <ion-list-header class="cabecera-seccion">
+              <ion-label>Opiniones</ion-label>
+            </ion-list-header>
+            <ion-item *ngFor="let comment of restaurant.comments">
+              <ion-label class="ion-text-wrap">"{{comment}}"</ion-label>
+            </ion-item>
+          </ion-list>
+          <ng-template #nocoments>
+            <p class="ion-text-center texto-sin-comentarios">No hay comentarios todavía...</p>
+          </ng-template>
+        </ion-col>
+      </ion-row>
+    </div>
   </ion-grid>
 </ion-content>

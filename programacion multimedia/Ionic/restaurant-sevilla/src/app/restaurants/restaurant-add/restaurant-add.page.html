@@ -1,8 +1,8 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-button slot="start">
-      <ion-back-button defaultHref ="/restaurants"></ion-back-button>
-    </ion-button>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/restaurants"></ion-back-button>
+    </ion-buttons>
     <ion-title>{{titulo}}</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,13 +12,20 @@
     <ion-col>
       <ion-card>
         <ion-input placeholder="Escribe el nombre del restaurante" type="text" #nombre></ion-input>
+        <ion-input placeholder="Escribe la dirección del restaurante" type="text" #direccion></ion-input>
+        <ion-input placeholder="Escribe el número de tenedores del restaurante" type="text" #tenedor></ion-input>
+        <ion-input placeholder="Escribe el teléfono del restaurante" type="text" #telefono></ion-input>
+        <ion-input placeholder="Escribe la descripción del restaurante" type="text" #descripcion></ion-input>
+        <ion-input placeholder="Escribe los entrantes del restaurante" type="text" #entrantes></ion-input>
+        <ion-input placeholder="Escribe los platos principales del restaurante" type="text" #principales></ion-input>
+        <ion-input placeholder="Escribe los postres del restaurante" type="text" #postres></ion-input>
         <ion-input placeholder="Escribe un link de la imagen" type="text" #image></ion-input>
       </ion-card>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col class="ion-text-center">
-      <ion-button color="primary" (click)="saveNewRestaurant(nombre, image)">Añadir</ion-button>
+      <ion-button color="primary" (click)="saveNewRestaurant(nombre,direccion,tenedor,telefono,descripcion,entrantes, principales, postres, image)">Añadir</ion-button>
     </ion-col>
   </ion-row>
 </ion-content>

@@ -2,6 +2,7 @@ package ceu.dam.ad.orm.practicas.biblioteca.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -20,7 +21,7 @@ public class Prestamo {
 	@ManyToOne
 	@JoinColumn(name="dni_socio", nullable = false)
 	private Socio socio;
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name = "id_libro",nullable = false)
 	private Libro libro;
 	private LocalDate fechaPrestamo;

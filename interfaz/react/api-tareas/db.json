@@ -47,6 +47,12 @@
       "prioridad": "media",
       "hecha": false,
       "id": "2IXtTDuHa4w"
+    },
+    {
+      "texto": "PENE",
+      "hecha": false,
+      "prioridad": "media",
+      "id": "Df0aAsOzXJs"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -4,6 +4,7 @@ import { RestaurantService } from '../restaurant.service';
 import { restaurant } from '../restaurant.model';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular/lazy';
+
 @Component({
   selector: 'app-restaurant-detail',
   templateUrl: './restaurant-detail.page.html',
@@ -11,17 +12,34 @@ import { AlertController } from '@ionic/angular/lazy';
   standalone: false,
 })
 export class RestaurantDetailPage implements OnInit {
- private restaurant: restaurant ={id:'',title:'',imageURL:'',comments:[]}
-  constructor(private activatedRouted: ActivatedRoute, 
-    private restaurantService:RestaurantService, 
-    private router:Router,
-    private alertCtrl:AlertController) { }
+  restaurant: restaurant = {
+    id: '',
+    nombre: '',
+    direccion: '',
+    numeroTenedores: '',
+    imageURL: '',
+    telefono: '',
+    descripcion: '',
+    cartaBasica: { entrantes: [], platosPrincipales: [], postres: [] },
+    comments: []
+  };
+  constructor(
+    private activatedRouted: ActivatedRoute, 
+    private restaurantService: RestaurantService, 
+    private router: Router,
+    private alertCtrl: AlertController
+  ) { }
 
   ngOnInit() {
-    this.activatedRouted.paramMap.subscribe(paraMap=>{
-      const recipeId = paraMap.get('restaurantID')
-      this.restaurant = this.restaurantService.getRestaurant(recipeId)
-    })
+    this.activatedRouted.paramMap.subscribe(paraMap => {
+      const recipeId = paraMap.get('restaurantID');
+      const found = this.restaurantService.getRestaurant(recipeId);
+      if (!found || !found.id) {
+        this.router.navigate(['/restaurants']);
+        return;
+      }
+      this.restaurant = found;
+    });
   }
 async deletePlace() {
   const element = await this.alertCtrl.create(

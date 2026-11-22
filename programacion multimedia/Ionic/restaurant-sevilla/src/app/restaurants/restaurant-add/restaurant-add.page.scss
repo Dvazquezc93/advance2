@@ -1,0 +1,39 @@
+ion-content {
+  --background: #fbf8f3;
+}
+
+ion-card {
+  border-radius: 12px;
+  border: 1px solid #eedec7;
+  box-shadow: 0 2px 8px rgba(138, 24, 32, 0.08);
+  background: #ffffff;
+  padding: 8px 4px;
+
+  ion-input {
+    border-bottom: 1px solid #f0e6d6;
+    margin: 6px 8px;
+    --placeholder-color: #888888;
+  }
+}
+
+ion-button {
+  --border-radius: 8px;
+  font-weight: bold;
+}
+
+:host-context(.ion-palette-dark) {
+  ion-content {
+    --background: #121212;
+  }
+
+  ion-card {
+    background: #1e1e1e;
+    border-color: #333333;
+
+    ion-input {
+      border-bottom-color: #333333;
+      --placeholder-color: #aaaaaa;
+      --color: #ffffff;
+    }
+  }
+}

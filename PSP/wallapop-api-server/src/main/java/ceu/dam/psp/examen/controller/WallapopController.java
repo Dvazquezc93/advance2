@@ -61,7 +61,11 @@ public class WallapopController {
 
 	@GetMapping("/usuarios/{identificador}")
 	public UsuarioResponseDto consultarUsuario(@Valid @PathVariable String identificador) throws NoExisteException {
-		return new ModelMapper().map(service.consultarUsuario(identificador), UsuarioResponseDto.class);
+		Usuario u =service.consultarUsuario(identificador);
+		if (u==null) {
+			throw new NoExisteException("no existe ese usuario con ese identificador"+identificador);
+		}
+		return new ModelMapper().map(u, UsuarioResponseDto.class);
 	}
 
 	@PostMapping("/articulos")
@@ -69,6 +73,7 @@ public class WallapopController {
 	public UsuarioResponseDto crearArticulo(@Valid @RequestBody CrearArticuloRequestDto articulo)
 			throws NoExisteException {
 		Usuario user = service.consultarUsuario(articulo.getIdPropietario());
+		
 		articulo.setFechaPublicacion(LocalDate.now());
 		articulo.setEstado(1);
 		return new ModelMapper().map(service.crearArticulo(new ModelMapper().map(articulo, Articulo.class)),

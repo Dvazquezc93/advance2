@@ -1,26 +1,67 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title>{{titulo}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleDarkMode()" [title]="isDarkMode ? 'Modo claro' : 'Modo oscuro'">
+        <ion-icon slot="icon-only" [name]="isDarkMode ? 'sunny-outline' : 'moon-outline'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <!-- Barra de búsqueda por nombre -->
+  <ion-toolbar color="primary">
+    <ion-searchbar 
+      placeholder="Buscar restaurante por nombre..." 
+      (ionInput)="filterRestaurants($event)"
+      [debounce]="150"
+      animated="true"
+      show-clear-button="focus"
+      class="sevillano-searchbar">
+    </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
- 
-  <ion-list>
-    <ion-item *ngFor ="let restaurant of restaurants" [routerLink]="['/restaurants', restaurant.id]">
-      <ion-avatar slot="start">
-        <ion-img [src]="restaurant.imageURL"></ion-img>
-      </ion-avatar>
-      <ion-label>
-        {{restaurant.title}}
-      </ion-label>
-    </ion-item>
+<ion-content [fullscreen]="true" class="sevilla-bg">
+  <div class="guia-subtitulo">
+    <p>Tapas, Bodegas y Restaurantes de Sevilla</p>
+  </div>
+
+  <!-- Mensaje si la búsqueda no arroja resultados -->
+  <div class="sin-resultados ion-text-center" *ngIf="filteredRestaurants.length === 0">
+    <ion-icon name="search-outline"></ion-icon>
+    <p>No se encontraron restaurantes con ese nombre.</p>
+  </div>
+
+  <ion-list lines="none" class="lista-sevillana" *ngIf="filteredRestaurants.length > 0">
+    <ion-item-sliding *ngFor="let restaurant of filteredRestaurants">
+      <ion-item [routerLink]="['/restaurants', restaurant.id]" class="item-sevillano" button detail="true">
+        <ion-avatar slot="start" class="avatar-sevillano">
+          <ion-img [src]="restaurant.imageURL"></ion-img>
+        </ion-avatar>
+        <ion-label>
+          <h2 class="nombre-restaurante">{{restaurant.nombre}}</h2>
+          <p class="detalle-restaurante" *ngIf="restaurant.numeroTenedores">
+            <ion-icon name="restaurant-outline"></ion-icon>
+            {{restaurant.numeroTenedores}}
+          </p>
+          <p class="telefono-restaurante" *ngIf="restaurant.telefono">
+            <ion-icon name="call-outline"></ion-icon>
+            {{restaurant.telefono}}
+          </p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="deleteRestaurant(restaurant, $event)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="danger" (click)="newRestaurant()">
-      <ion-icon name ="add"></ion-icon><p>New</p>
+    <ion-fab-button color="secondary" (click)="newRestaurant()">
+      <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
 </ion-content>

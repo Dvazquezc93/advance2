@@ -1,0 +1,131 @@
+.sevilla-bg {
+  --background: #fbf8f3;
+}
+
+.guia-subtitulo {
+  background: #8a1820;
+  border-bottom: 3px solid #d99b26;
+  padding: 10px 16px;
+  text-align: center;
+
+  p {
+    margin: 0;
+    color: #fcefd6;
+    font-size: 0.95rem;
+    font-style: italic;
+    letter-spacing: 0.5px;
+  }
+}
+
+.lista-sevillana {
+  background: transparent;
+  padding: 10px 12px;
+
+  .item-sevillano {
+    --background: #ffffff;
+    --border-radius: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #eedec7;
+    box-shadow: 0 2px 6px rgba(138, 24, 32, 0.08);
+
+    .avatar-sevillano {
+      border: 2px solid #d99b26;
+      border-radius: 50%;
+    }
+
+    .nombre-restaurante {
+      font-family: 'Georgia', serif;
+      font-weight: bold;
+      color: #8a1820;
+      font-size: 1.05rem;
+    }
+
+    .detalle-restaurante {
+      color: #d99b26;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .telefono-restaurante {
+      color: #555555;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 2px;
+    }
+
+    .direccion-restaurante {
+      color: #777777;
+      font-size: 0.8rem;
+    }
+  }
+
+  ion-item-sliding {
+    margin-bottom: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+}
+
+.sevillano-searchbar {
+  --background: #ffffff;
+  --color: #000000;
+  --placeholder-color: #777777;
+  --icon-color: #8a1820;
+  --clear-button-color: #8a1820;
+  --border-radius: 8px;
+  padding-top: 0;
+  padding-bottom: 6px;
+}
+
+.sin-resultados {
+  padding: 40px 20px;
+  color: #777777;
+
+  ion-icon {
+    font-size: 2.8rem;
+    color: #d99b26;
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 0.95rem;
+    margin: 0;
+  }
+}
+
+/* Adaptación a Modo Oscuro */
+:host-context(.ion-palette-dark) {
+  .sevilla-bg {
+    --background: #121212;
+  }
+
+  .lista-sevillana .item-sevillano {
+    --background: #1e1e1e;
+    border-color: #333333;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+
+    .nombre-restaurante {
+      color: #f28b82;
+    }
+
+    .telefono-restaurante {
+      color: #cccccc;
+    }
+  }
+
+  .sevillano-searchbar {
+    --background: #2a2a2a;
+    --color: #ffffff;
+    --placeholder-color: #aaaaaa;
+    --icon-color: #f28b82;
+  }
+
+  .sin-resultados {
+    color: #aaaaaa;
+  }
+}
