@@ -1,6 +1,5 @@
 import { congratulations } from './escenas/Congratulations.js';
 import { Gameover } from './escenas/Gameover.js';
-import { Game } from './escenas/game.js';
 import { Inicio } from './escenas/Inicio.js';
 import { PhaseOne } from './escenas/phaseone.js';
 import { PhaseTwo } from './escenas/Phasetwo.js';
@@ -11,7 +10,7 @@ const config  = {
     type : Phaser.AUTO,
     width: 800,
     height: 500,
-    scene: [Inicio, PhaseOne, PhaseTwo, PhaseThree, PhaseFour, Game, congratulations, Gameover],
+    scene: [Inicio, PhaseOne, PhaseTwo, PhaseThree, PhaseFour, congratulations, Gameover],
     physics: {
         default :'arcade',
         arcade: {

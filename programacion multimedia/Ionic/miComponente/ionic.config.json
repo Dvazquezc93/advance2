@@ -1,0 +1,7 @@
+{
+  "name": "miComponente",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
