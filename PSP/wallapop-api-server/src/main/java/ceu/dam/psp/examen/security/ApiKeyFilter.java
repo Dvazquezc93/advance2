@@ -17,16 +17,15 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class ApiKeyFilter extends OncePerRequestFilter {
-	@Value("${userapi.apikey")
-	private String apiKey;
+	
 	@Autowired
 	private WallapopService service;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		String apiKeyR =request.getHeader(service.consultarApiKey());
-		if (apiKeyR != null && apiKeyR.equals(apiKey)) {
+		String apiKeyR =request.getHeader("API-KEY");
+		if (apiKeyR != null && apiKeyR.equals(service.consultarApiKey())) {
 			filterChain.doFilter(request, response);
 
 		}else {

@@ -22,6 +22,7 @@ import ceu.dam.ad.orm.practicas.biblioteca.repository.LibroRepository;
 import ceu.dam.ad.orm.practicas.biblioteca.repository.PrestamoRepository;
 import ceu.dam.ad.orm.practicas.biblioteca.repository.SocioRepository;
 import jakarta.transaction.Transactional;
+
 @Service
 public class BibliotecaServiceImpl implements BibliotecaService {
 
@@ -36,11 +37,13 @@ public class BibliotecaServiceImpl implements BibliotecaService {
 
 	@Override
 	public Socio altaSocio(Socio socio) throws BibliotecaException {
-		if (repoS.findById(socio.getDni()) == null) {
+		if (repoS.findById(socio.getDni()) != null) {
 			throw new BibliotecaException("ya existe ese socio con ese dni");
 		}
-		socio.getCarnet().setFechaAlta(LocalDate.now());
-		socio.getCarnet().setFechaCaducidad(LocalDate.now().plusYears(1));
+		Carnet c = new Carnet();
+		c.setFechaAlta(LocalDate.now());
+		c.setFechaCaducidad(LocalDate.now().plusYears(1));
+		socio.setCarnet(c);
 		return repoS.save(socio);
 
 	}
@@ -53,7 +56,7 @@ public class BibliotecaServiceImpl implements BibliotecaService {
 	@Override
 	public Libro altaLibro(Libro libro) throws BibliotecaException {
 		List<Libro> libros = repoL.findByIsbn(libro.getIsbn());
-		if (libros.isEmpty()) {
+		if (!libros.isEmpty()) {
 			throw new BibliotecaException("ya existe ese libro con ese ISBN");
 		}
 		return repoL.save(libro);
@@ -104,25 +107,24 @@ public class BibliotecaServiceImpl implements BibliotecaService {
 		PrestamoKey p = new PrestamoKey();
 		p.setAnio(anio);
 		p.setNumPrestamo(numPrestamo);
-		Prestamo pConfirmate =repoP.findById(p).orElseThrow(() -> new NotFoundException("No existe ese prestamos"));
-		if (pConfirmate.getFechaDevolucion()!=null) {
-			throw new BibliotecaException("El prestamo ya se habia devuelto"); 
+		Prestamo pConfirmate = repoP.findById(p).orElseThrow(() -> new NotFoundException("No existe ese prestamos"));
+		if (pConfirmate.getFechaDevolucion() != null) {
+			throw new BibliotecaException("El prestamo ya se habia devuelto");
 		}
 		pConfirmate.setFechaDevolucion(LocalDate.now());
-		pConfirmate.getLibro().setEjemplaresDisponibles(pConfirmate.getLibro().getEjemplaresDisponibles()+1);
+		pConfirmate.getLibro().setEjemplaresDisponibles(pConfirmate.getLibro().getEjemplaresDisponibles() + 1);
 		repoP.save(pConfirmate);
 	}
 
 	@Override
 	public Carnet renovarCarnet(String dniSocio) throws NotFoundException, BibliotecaException {
-		Socio s =repoS.findById(dniSocio).orElseThrow(()-> new NotFoundException("No existe ese socio en la BBDD"));
-		if (s.getCarnet()==null) {
-			throw new BibliotecaException("EL socio no tiene carnet"); 
+		Socio s = repoS.findById(dniSocio).orElseThrow(() -> new NotFoundException("No existe ese socio en la BBDD"));
+		if (s.getCarnet() == null) {
+			throw new BibliotecaException("EL socio no tiene carnet");
 		}
 		if (s.getCarnet().getFechaCaducidad().isAfter(LocalDate.now())) {
 			s.getCarnet().setFechaCaducidad(LocalDate.now().plusYears(1));
-		}
-		else {
+		} else {
 			s.getCarnet().setFechaCaducidad(s.getCarnet().getFechaCaducidad().plusYears(1));
 		}
 		return repoC.save(s.getCarnet());
@@ -130,8 +132,8 @@ public class BibliotecaServiceImpl implements BibliotecaService {
 
 	@Override
 	public List<Prestamo> consultarPrestamosActivos(String dniSocio) throws NotFoundException {
-		Socio s =repoS.findById(dniSocio).orElseThrow(()-> new NotFoundException("No existe ese socio en la BBDD"));
-		return s.getPrestamos().stream().filter(p->p.getFechaDevolucion()==null).toList();
+		Socio s = repoS.findById(dniSocio).orElseThrow(() -> new NotFoundException("No existe ese socio en la BBDD"));
+		return s.getPrestamos().stream().filter(p -> p.getFechaDevolucion() == null).toList();
 	}
 
 }

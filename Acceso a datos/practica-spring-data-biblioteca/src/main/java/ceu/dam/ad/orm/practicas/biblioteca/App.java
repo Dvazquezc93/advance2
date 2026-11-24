@@ -8,10 +8,10 @@ import ceu.dam.ad.orm.practicas.biblioteca.test.TestBiblioteca;
 
 @SpringBootApplication
 public class App {
-
+	
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(App.class, args);
-		// context.getBean(TestBiblioteca.class).test();
+		context.getBean(TestBiblioteca.class).test();
 	}
 
 }
