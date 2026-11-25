@@ -36,11 +36,13 @@ public class BibliotecaServiceImpl implements BibliotecaService {
 	private CarnetRepository repoC;
 
 	@Override
+	@Transactional
 	public Socio altaSocio(Socio socio) throws BibliotecaException {
-		if (repoS.findById(socio.getDni()) != null) {
+		if (repoS.findById(socio.getDni()).isPresent()) {
 			throw new BibliotecaException("ya existe ese socio con ese dni");
 		}
 		Carnet c = new Carnet();
+		c.setSocio(socio);
 		c.setFechaAlta(LocalDate.now());
 		c.setFechaCaducidad(LocalDate.now().plusYears(1));
 		socio.setCarnet(c);
@@ -83,7 +85,7 @@ public class BibliotecaServiceImpl implements BibliotecaService {
 		List<Prestamo> pl = s.getPrestamos().stream()
 				.filter((p) -> p.getLibro().equals(l) && p.getFechaDevolucion() == null).toList();
 
-		if (s.getCarnet() == null || s.getCarnet().getFechaCaducidad().isBefore(LocalDate.now()) || pActivos.size() == 3
+		if (s.getCarnet() == null || s.getCarnet().getFechaCaducidad().isBefore(LocalDate.now()) || pActivos.size() >3
 				|| l.getEjemplaresDisponibles() == 0 || pActivosVencidos.size() > 0 || pl.size() > 0) {
 			throw new BibliotecaException("Error de negocio general");
 		}
@@ -98,6 +100,7 @@ public class BibliotecaServiceImpl implements BibliotecaService {
 		p.setAnio(LocalDate.now().getYear());
 		p.setFechaPrestamo(LocalDate.now());
 		l.setEjemplaresDisponibles(l.getEjemplaresDisponibles() - 1);
+		repoL.save(l);
 		return repoP.save(p);
 	}
 
@@ -114,6 +117,7 @@ public class BibliotecaServiceImpl implements BibliotecaService {
 		pConfirmate.setFechaDevolucion(LocalDate.now());
 		pConfirmate.getLibro().setEjemplaresDisponibles(pConfirmate.getLibro().getEjemplaresDisponibles() + 1);
 		repoP.save(pConfirmate);
+		repoL.save(pConfirmate.getLibro());
 	}
 
 	@Override

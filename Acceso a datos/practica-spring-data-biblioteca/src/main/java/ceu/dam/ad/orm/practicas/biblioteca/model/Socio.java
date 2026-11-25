@@ -16,7 +16,7 @@ public class Socio {
 	private String dni;
 	private String nombre;
 	private String apellidos;
-	@OneToOne(mappedBy = "socio",cascade = CascadeType.ALL, fetch= FetchType.EAGER)
+	@OneToOne(mappedBy = "socio",cascade = CascadeType.ALL)
 	private Carnet carnet;
 	@OneToMany(mappedBy = "socio",fetch= FetchType.EAGER)
 	private List<Prestamo> prestamos;

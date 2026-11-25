@@ -43,7 +43,7 @@ public class BibliotecaControllerImp   {
 	}
 	@PostMapping("/libro")
 	public Libro altaLibro(@Valid @RequestBody LibroRequestDto libro) throws BibliotecaException {
-		retu
+		
 		return null;
 	}
 

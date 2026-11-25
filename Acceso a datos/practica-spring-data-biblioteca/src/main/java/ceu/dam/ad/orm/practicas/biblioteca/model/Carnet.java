@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.hibernate.annotations.JdbcTypeCode;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -16,6 +17,7 @@ public class Carnet {
 	@Id
 	@GeneratedValue
 	@JdbcTypeCode(Types.VARCHAR)
+	@Column(name = "uuid_carnet")
 	private UUID id;
 	@OneToOne
 	@JoinColumn(name="dni_socio", nullable = false)
