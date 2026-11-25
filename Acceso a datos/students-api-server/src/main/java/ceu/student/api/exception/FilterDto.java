@@ -1,4 +1,4 @@
-package ceu.student.api.service;
+package ceu.student.api.exception;
 
 import java.time.LocalDate;
 

@@ -2,6 +2,7 @@ package ceu.student.api.service;
 
 import java.util.List;
 
+import ceu.student.api.exception.FilterDto;
 import ceu.student.api.exception.StudentDuplicateException;
 import ceu.student.api.exception.StudentNotFoundException;
 import ceu.student.api.model.Student;
