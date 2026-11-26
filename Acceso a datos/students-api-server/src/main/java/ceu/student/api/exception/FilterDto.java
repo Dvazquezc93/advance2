@@ -9,7 +9,8 @@ public class FilterDto {
 	private String firstName;
 	private String lastName;
 	private String email;
-	private LocalDate dateOfBirth;
+	private Integer age;
 	private String program;
+	private String gender;
 
 }

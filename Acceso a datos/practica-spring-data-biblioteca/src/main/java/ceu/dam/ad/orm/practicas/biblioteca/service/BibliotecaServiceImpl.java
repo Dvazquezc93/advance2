@@ -137,6 +137,7 @@ public class BibliotecaServiceImpl implements BibliotecaService {
 	@Override
 	public List<Prestamo> consultarPrestamosActivos(String dniSocio) throws NotFoundException {
 		Socio s = repoS.findById(dniSocio).orElseThrow(() -> new NotFoundException("No existe ese socio en la BBDD"));
+		
 		return s.getPrestamos().stream().filter(p -> p.getFechaDevolucion() == null).toList();
 	}
 

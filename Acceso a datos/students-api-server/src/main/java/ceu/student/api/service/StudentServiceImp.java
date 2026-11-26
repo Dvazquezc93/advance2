@@ -16,6 +16,7 @@ import ceu.student.api.exception.StudentDuplicateException;
 import ceu.student.api.exception.StudentNotFoundException;
 import ceu.student.api.model.Student;
 import ceu.student.api.repository.StudentRepository;
+
 @Service
 public class StudentServiceImp implements StudentService {
 	@Autowired
@@ -24,46 +25,49 @@ public class StudentServiceImp implements StudentService {
 	@Override
 	public Student create(Student student) throws StudentDuplicateException {
 		if (repoS.findByDniOrEmail(student.getDni(), student.getEmail()).isEmpty()) {
-			student.setCreateAt(LocalDateTime.now());
+			student.setCreatedAt(LocalDateTime.now());
 			return repoS.save(student);
 		}
-		throw new StudentDuplicateException("Ese estudiante ya esta en la base de datos registrado");
+		throw new StudentDuplicateException("That student is already registered in the database");
 	}
 
 	@Override
 	public void remove(Long id) throws StudentNotFoundException {
 		findById(id);
 		repoS.deleteById(id);
-
 	}
 
 	@Override
 	public Student findById(Long id) throws StudentNotFoundException {
 		return repoS.findById(id)
-				.orElseThrow(() -> new StudentNotFoundException("El alumno no existe  con ese id " + id));
-
+				.orElseThrow(() -> new StudentNotFoundException("The student does not exist with id " + id));
 	}
 
 	@Override
 	public List<Student> findAll() throws StudentNotFoundException {
-		List<Student> students = repoS.findAllOrderByDniAsc();
+		List<Student> students = repoS.findAllByOrderByDniAsc();
 		if (students.isEmpty()) {
-			throw new StudentNotFoundException("No hay estudiantes en la base de datos");
+			throw new StudentNotFoundException("There are no students in the database");
 		}
 		return students;
 	}
 
 	@Override
 	public List<Student> findByAgeRange(Integer minAge, Integer maxAge) {
-		return repoS.findByDateOfBirthBetweenOrderByDateOfBirthAsc(LocalDate.now().minusYears(maxAge),
+		return repoS.findByDateOfBirthBetweenOrderByDateOfBirthDesc(LocalDate.now().minusYears(maxAge),
 				LocalDate.now().minusYears(minAge));
 	}
 
 	@Override
 	public List<Student> search(FilterDto filter) {
-		Student filtrado = new ModelMapper().map(filter, Student.class);
+		Student filtered = new ModelMapper().map(filter, Student.class);
 		ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase().withStringMatcher(StringMatcher.CONTAINING);
-		return repoS.findAll(Example.of(filtrado, matcher));
+		List<Student> students = repoS.findAll(Example.of(filtered, matcher));
+		if (filter.getAge() != null) {
+			return students.stream().filter(s -> s.getAge().equals(filter.getAge())).toList();
+
+		}
+		return students;
 	}
 
 }
