@@ -1,19 +1,18 @@
 // Importa Express para crear un enrutador independiente.
 const express = require('express')
-// Crea una aplicación Express; este objeto no se utiliza en el resto del archivo.
-const app = express()
 
+//Importamos por desestructuración el json de infoCursos
+const {programacion} = require('../Datos/cursos.js').infoCursos
 // Crea el enrutador que agruparía las rutas de programación.
-const routerProgramacion =express.Router()
-// Monta el enrutador en una aplicación local. Para que afecte al servidor
-// principal, este módulo tendría que exportar el enrutador e importarse allí.
-app.use('/api/cursos/programacion', routerProgramacion)
+const routerProgramacion=express.Router()
 
+
+routerProgramacion.use(express.json())
 
 // Ruta raíz del enrutador: intenta responder con todos los cursos de programación.
 // En este archivo infoCursos no está importado ni definido.
 routerProgramacion.get('/',(req,res)=>{
-    res.send(JSON.stringify(infoCursos.programacion))
+    res.send(JSON.stringify(programacion))
 })
 
 
@@ -22,7 +21,7 @@ routerProgramacion.get('/:lenguaje',(req,res)=>{
     // Lee el parámetro dinámico :lenguaje.
     const lenguaje = req.params.lenguaje
     // Filtra el catálogo para conservar los cursos de ese lenguaje.
-    const resultados = infoCursos.programacion.filter(curso => curso.lenguaje ===lenguaje)
+    const resultados = programacion.filter(curso => curso.lenguaje ===lenguaje)
     // Responde con 404 cuando no hay coincidencias.
     if(resultados.length===0){
         return res.status(404).send("no se encontraron curso de "+lenguaje)
@@ -39,8 +38,8 @@ routerProgramacion.get('/:lenguaje/:nivel',(req,res)=>{
     // Lee ambos parámetros de la URL.
     const lenguaje = req.params.lenguaje
     const nivel = req.params.nivel
-    // Filtra el catálogo por lenguaje y nivel; infoCursos no está definido aquí.
-    const resultados = infoCursos.programacion.filter(curso => curso.lenguaje ===lenguaje && curso.nivel===nivel)
+    // Filtra el catálogo por lenguaje y nivel; 
+    const resultados = programacion.filter(curso => curso.lenguaje ===lenguaje && curso.nivel===nivel)
     // Responde con 404 cuando no encuentra cursos para ese lenguaje.
     if(resultados.length===0){
         return res.status(404).send("no se encontraron curso de "+lenguaje)
@@ -53,3 +52,21 @@ routerProgramacion.get('/:lenguaje/:nivel',(req,res)=>{
      res.send(JSON.stringify(resultados))
    
 })
+
+routerProgramacion.post('/', (req, res)=>{
+    let cursoNuevo =req.body
+    programacion.push(cursoNuevo)
+    res.send(JSON.stringify(programacion))
+})
+routerProgramacion.put('/:id', (req, res)=>{
+    const cursoActualizado =req.body
+    const id= req.params.id
+    const indice = programacion.findIndex(curso=> curso.id ===id)
+    if (indice>=0) {
+        programacion[indice]=cursoActualizado
+    }
+   
+    res.send(JSON.stringify(programacion))
+})
+
+module.exports =routerProgramacion

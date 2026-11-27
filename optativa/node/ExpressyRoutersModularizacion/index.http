@@ -1,0 +1,62 @@
+#Peticion POST
+
+###
+POST  http://localhost:3000/api/cursos/programacion
+Content-Type: application/json
+
+[
+  {
+    "id": 6,
+    "titulo": "Domina la Fuerza con React",
+    "lenguaje": "TypeScript",
+    "vistas": 1138,
+    "nivel": "Padawan"
+  },
+  {
+    "id": 7,
+    "titulo": "Seguridad Informática: Que no pasen los Balrogs",
+    "lenguaje": "Rust",
+    "vistas": 3000,
+    "nivel": "Mago Blanco"
+  },
+  {
+    "id": 8,
+    "titulo": "Super Saiyan de la Ciencia de Datos",
+    "lenguaje": "Python",
+    "vistas": 9001,
+    "nivel": "Dios Destructor"
+  },
+  {
+    "id": 9,
+    "titulo": "Hacking ético en la Matrix",
+    "lenguaje": "C++",
+    "vistas": 404,
+    "nivel": "El Elegido"
+  },
+  {
+    "id": 10,
+    "titulo": "Atrápalos todos: Consuming APIs REST",
+    "lenguaje": "Go",
+    "vistas": 151,
+    "nivel": "Maestro Pokémon"
+  },
+  {
+    "id": 11,
+    "titulo": "Arquitectura de Microservicios en el Multiverso",
+    "lenguaje": "Java",
+    "vistas": 616,
+    "nivel": "Hechicero Supremo"
+  }
+]
+
+###
+PUT http://localhost:3000/api/cursos/programacion/1
+Content-Type: application/json
+
+ {
+    "id": 8,
+    "titulo": "Super Saiyan de la Ciencia de Datos",
+    "lenguaje": "Python",
+    "vistas": 8000,
+    "nivel": "Dios Destructor"
+  }

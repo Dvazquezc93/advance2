@@ -1,7 +1,7 @@
 // Datos de ejemplo que representan el catálogo de cursos de la API.
 let infoCursos = { 
     // Lista de cursos de programación; cada curso incluye su lenguaje y nivel.
-    "programacion": 
+    'programacion': 
     [ { id: 1, titulo: 'Aprende Python', lenguaje: 'Python', vistas: 15000, nivel: 'básico' }, 
     { id: 2, titulo: 'Python Intermedio', lenguaje: 'Python', vistas: 13553, nivel: 'intermedio' },
      { id: 3, titulo: 'Aprende JavaScript', lenguaje: 'javascript', vistas: 102223, nivel: 'básico' } 
